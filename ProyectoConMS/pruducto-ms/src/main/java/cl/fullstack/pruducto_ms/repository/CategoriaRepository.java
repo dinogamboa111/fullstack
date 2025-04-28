@@ -1,5 +1,11 @@
 package cl.fullstack.pruducto_ms.repository;
 
-public interface CategoriaRepository {
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import cl.fullstack.pruducto_ms.entity.CategoriaEntity;
+
+@Repository
+public interface CategoriaRepository extends JpaRepository<CategoriaEntity, Long> {
 }
