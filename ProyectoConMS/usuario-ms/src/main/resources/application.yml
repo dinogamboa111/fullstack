@@ -1,9 +1,9 @@
 server:
-  port: 8920 
+  port: 8930
 
 spring:
   application:
-    name: producto-service
+    name: usuario-service
 
   datasource:
     url: jdbc:oracle:thin:@207.231.108.32:49161/xe
