@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UsuarioMsApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.usuario_ms.UsuarioMsApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ClienteMsApplication<cliente-ms>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

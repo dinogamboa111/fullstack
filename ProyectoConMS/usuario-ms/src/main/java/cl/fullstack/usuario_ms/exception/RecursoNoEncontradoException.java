@@ -1,4 +1,5 @@
-package cl.fullstack.pruducto_ms.exception;
+package cl.fullstack.usuario_ms.exception;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
