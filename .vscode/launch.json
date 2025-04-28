@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PruductoMsApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.pruducto_ms.PruductoMsApplication",
+            "projectName": "pruducto-ms"
+        },
+        {
+            "type": "java",
             "name": "EurekaserverApplication",
             "request": "launch",
             "mainClass": "cl.fullstack.eurekaserver.EurekaserverApplication",
