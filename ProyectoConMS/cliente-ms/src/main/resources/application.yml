@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: pedido-service
+    name: cliente-service
 
   datasource: #datos de nuestra base de datos
     url: jdbc:oracle:thin:@207.231.108.32:49161/xe

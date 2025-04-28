@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "EurekaserverApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.eurekaserver.EurekaserverApplication",
+            "projectName": "eurekaserver"
+        },
+        {
+            "type": "java",
             "name": "UsuarioMsApplication",
             "request": "launch",
             "mainClass": "cl.fullstack.usuario_ms.UsuarioMsApplication",
