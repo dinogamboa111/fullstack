@@ -1,10 +1,12 @@
 package cl.fullstack.pruducto_ms.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.fullstack.pruducto_ms.dto.ProveedorDTO;
 import cl.fullstack.pruducto_ms.entity.ProveedorEntity;
+import cl.fullstack.pruducto_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.pruducto_ms.repository.ProveedorRepository;
 import cl.fullstack.pruducto_ms.service.IProveedorService;
 
@@ -17,57 +19,42 @@ public class ProveedorServiceImpl implements IProveedorService {
     @Autowired
     private ProveedorRepository proveedorRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public List<ProveedorDTO> getAllProveedores() {
-        List<ProveedorEntity> proveedores = proveedorRepository.findAll();
-        return proveedores.stream().map(proveedor -> {
-            ProveedorDTO dto = new ProveedorDTO();
-            dto.setId(proveedor.getId());
-            dto.setNombre(proveedor.getNombre());
-            dto.setTelefono(proveedor.getTelefono());
-            dto.setDireccion(proveedor.getDireccion());
-            return dto;
-        }).collect(Collectors.toList());
+    public ProveedorDTO createProveedor(ProveedorDTO dto) {
+        ProveedorEntity proveedor = modelMapper.map(dto, ProveedorEntity.class);
+        return modelMapper.map(proveedorRepository.save(proveedor), ProveedorDTO.class);
     }
 
     @Override
     public ProveedorDTO getProveedorById(Long id) {
-        ProveedorEntity proveedor = proveedorRepository.findById(id).orElse(null);
-        if (proveedor == null) return null;
-        ProveedorDTO dto = new ProveedorDTO();
-        dto.setId(proveedor.getId());
-        dto.setNombre(proveedor.getNombre());
-        dto.setTelefono(proveedor.getTelefono());
-        dto.setDireccion(proveedor.getDireccion());
-        return dto;
+        ProveedorEntity proveedor = proveedorRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Proveedor no encontrado con ID: " + id));
+        return modelMapper.map(proveedor, ProveedorDTO.class);
     }
 
     @Override
-    public ProveedorDTO createProveedor(ProveedorDTO proveedorDTO) {
-        ProveedorEntity proveedor = new ProveedorEntity();
-        proveedor.setNombre(proveedorDTO.getNombre());
-        proveedor.setTelefono(proveedorDTO.getTelefono());
-        proveedor.setDireccion(proveedorDTO.getDireccion());
-        proveedorRepository.save(proveedor);
-        proveedorDTO.setId(proveedor.getId());
-        return proveedorDTO;
+    public List<ProveedorDTO> getAllProveedores() {
+        return proveedorRepository.findAll().stream()
+                .map(proveedor -> modelMapper.map(proveedor, ProveedorDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public ProveedorDTO updateProveedor(Long id, ProveedorDTO proveedorDTO) {
-        ProveedorEntity proveedor = proveedorRepository.findById(id).orElse(null);
-        if (proveedor != null) {
-            proveedor.setNombre(proveedorDTO.getNombre());
-            proveedor.setTelefono(proveedorDTO.getTelefono());
-            proveedor.setDireccion(proveedorDTO.getDireccion());
-            proveedorRepository.save(proveedor);
-            proveedorDTO.setId(proveedor.getId());
-        }
-        return proveedorDTO;
+    public ProveedorDTO updateProveedor(Long id, ProveedorDTO dto) {
+        proveedorRepository.findById(id)
+          .orElseThrow(() -> new RecursoNoEncontradoException("Proveedor no encontrado con ID: " + id));
+        dto.setId(id); // aseguramos que no cambie el ID
+        ProveedorEntity actualizado = modelMapper.map(dto, ProveedorEntity.class);
+        return modelMapper.map(proveedorRepository.save(actualizado), ProveedorDTO.class);
     }
 
     @Override
     public void deleteProveedor(Long id) {
-        proveedorRepository.deleteById(id);
+        ProveedorEntity proveedor = proveedorRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Proveedor no encontrado con ID: " + id));
+        proveedorRepository.delete(proveedor);
     }
 }
