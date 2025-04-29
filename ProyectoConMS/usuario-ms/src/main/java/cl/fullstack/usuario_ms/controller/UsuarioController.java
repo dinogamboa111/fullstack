@@ -1,6 +1,5 @@
 package cl.fullstack.usuario_ms.controller;
 
-
 import cl.fullstack.usuario_ms.dto.UsuarioDTO;
 import cl.fullstack.usuario_ms.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
