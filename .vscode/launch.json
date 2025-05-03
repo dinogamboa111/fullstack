@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "PruductoMsApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.pruducto_ms.PruductoMsApplication",
+            "projectName": "pruducto-ms"
+        },
+        {
+            "type": "java",
+            "name": "EurekaserverApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.eurekaserver.EurekaserverApplication",
+            "projectName": "eurekaserver"
+        },
+        {
+            "type": "java",
+            "name": "UsuarioMsApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.usuario_ms.UsuarioMsApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ClienteMsApplication<cliente-ms>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "cl.fullstack.cliente_ms.ClienteMsApplication",
+            "projectName": "cliente-ms",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
