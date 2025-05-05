@@ -2,9 +2,16 @@
     "configurations": [
         {
             "type": "java",
+
             "name": "UbicacionMsApplication",
             "request": "launch",
             "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication"
+
+            "name": "PedidoMsApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.pedido_ms.PedidoMsApplication",
+            "projectName": "pedido-ms"
+
         },
         {
             "type": "java",
