@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "UbicacionMsApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication"
+        },
+        {
+            "type": "java",
             "name": "PruductoMsApplication",
             "request": "launch",
             "mainClass": "cl.fullstack.pruducto_ms.PruductoMsApplication",
@@ -28,6 +34,16 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "cl.fullstack.cliente_ms.ClienteMsApplication",
             "projectName": "cliente-ms",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-UbicacionMsApplication<ubicacion-ms>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication",
+            "projectName": "ubicacion-ms",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
