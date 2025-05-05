@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PedidoMsApplication",
+            "request": "launch",
+            "mainClass": "cl.fullstack.pedido_ms.PedidoMsApplication",
+            "projectName": "pedido-ms"
+        },
+        {
+            "type": "java",
             "name": "PruductoMsApplication",
             "request": "launch",
             "mainClass": "cl.fullstack.pruducto_ms.PruductoMsApplication",
