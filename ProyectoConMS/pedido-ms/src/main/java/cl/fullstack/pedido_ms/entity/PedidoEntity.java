@@ -34,4 +34,3 @@ public class PedidoEntity {
     private int idUsuario;
 
 }
-

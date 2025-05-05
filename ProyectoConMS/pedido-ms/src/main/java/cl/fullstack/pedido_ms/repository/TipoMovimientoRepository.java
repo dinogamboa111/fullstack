@@ -3,9 +3,9 @@ package cl.fullstack.pedido_ms.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import cl.fullstack.pedido_ms.entity.PedidoEntity;
+import cl.fullstack.pedido_ms.entity.TipoMovimientoEntity;
 
 @Repository
-public interface PedidoRepository extends JpaRepository<PedidoEntity, Integer> {
+public interface TipoMovimientoRepository extends JpaRepository<TipoMovimientoEntity, Integer> {
 
 }

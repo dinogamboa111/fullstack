@@ -1,4 +1,5 @@
 package cl.fullstack.pedido_ms.service.impl;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class PedidoServiceImpl implements IPedidoService {
 
     @Override
     public PedidoDTO createPedido(PedidoDTO dto) {
-        PedidoEntity pedido= modelMapper.map(dto, PedidoEntity.class);
+        PedidoEntity pedido = modelMapper.map(dto, PedidoEntity.class);
         return modelMapper.map(pedidoRepository.save(pedido), PedidoDTO.class);
     }
 
@@ -46,7 +47,7 @@ public class PedidoServiceImpl implements IPedidoService {
     @Override
     public PedidoDTO updatePedido(int id, PedidoDTO dto) {
         pedidoRepository.findById(id)
-          .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrada con ID: " + id));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrada con ID: " + id));
         dto.setRutCliente(id); // aseguramos que no cambie el ID
         PedidoEntity actualizado = modelMapper.map(dto, PedidoEntity.class);
         return modelMapper.map(pedidoRepository.save(actualizado), PedidoDTO.class);
@@ -59,6 +60,4 @@ public class PedidoServiceImpl implements IPedidoService {
         pedidoRepository.delete(pedido);
     }
 
-
 }
-

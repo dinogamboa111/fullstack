@@ -6,15 +6,14 @@ import cl.fullstack.pedido_ms.dto.PedidoDTO;
 
 public interface IPedidoService {
 
-    
     List<PedidoDTO> getAllPedidos();
-    PedidoDTO getPedidoById(int idPedido);
-    PedidoDTO createPedido(PedidoDTO pedidoDTO);
-    PedidoDTO updatePedido(int idPEdido, PedidoDTO pedidoDTO);
-    void deletePedido(int idPedido);
-   
 
+    PedidoDTO getPedidoById(int idPedido);
+
+    PedidoDTO createPedido(PedidoDTO pedidoDTO);
+
+    PedidoDTO updatePedido(int idPEdido, PedidoDTO pedidoDTO);
+
+    void deletePedido(int idPedido);
 
 }
-
-

@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
-
 @EnableDiscoveryClient
 @SpringBootApplication
 public class PedidoMsApplication {
@@ -15,15 +14,9 @@ public class PedidoMsApplication {
 		SpringApplication.run(PedidoMsApplication.class, args);
 	}
 
-	
 	@Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 
-
 }
-
-
-
-
