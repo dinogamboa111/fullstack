@@ -16,6 +16,8 @@ import cl.fullstack.cliente_ms.service.IClienteService;
 @Service
 public class ClienteServiceImpl implements IClienteService {
 
+    // usar rest template
+
     @Autowired
     private ClienteRepository clienteRepository;
 

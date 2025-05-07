@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "usuario")
+@Table(name = "usuario") //modifique nombre tabla usuario, estaba generandola de  manera automatica como USUARIO_ENTITY
 public class UsuarioEntity {
 
     @Id
