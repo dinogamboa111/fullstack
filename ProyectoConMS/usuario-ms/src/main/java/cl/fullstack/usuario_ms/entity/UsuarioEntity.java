@@ -3,12 +3,14 @@ package cl.fullstack.usuario_ms.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "usuario")
 public class UsuarioEntity {
 
     @Id
