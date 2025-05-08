@@ -24,7 +24,7 @@ public class TipoMovimientoEntity {
     @SequenceGenerator(name = "tipoMovimiento_seq", sequenceName = "TIPOMOVIMIENTO_SEQ", allocationSize = 1)
     private int idMovimiento;
 
-    @Column(name = "rut_cliente", nullable = false)
-    private String nombreMovimiento;
+    @Column(name = "nombre_movimiento", nullable = false)
+    private String nombreMovimiento; 
 
 }
