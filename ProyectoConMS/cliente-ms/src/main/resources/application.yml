@@ -14,8 +14,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-    database-platform: org.hibernate.dialect.Oracle12cDialect
-  ##no dejaba post asi q coloque esto pa probar la vercion jpa
+ 
  
 eureka:
   client:

@@ -27,25 +27,15 @@ public class ClienteServiceImpl implements IClienteService {
     private ModelMapper modelMapper;
 
     @Override
-    public ClienteDTO crearCliente(ClienteDTO dto) {
-        // Validación de RUT
-        if (clienteRepository.existsByRutCliente(dto.getRutCliente())) {
-            throw new CorreoDuplicadoException("Ya existe un cliente con el RUT: " + dto.getRutCliente());
-        }
+    public ClienteDTO crearCliente(ClienteDTO clienteDTO) {
+        // Mapeamos el DTO a la entidad ClienteEntity
+        ClienteEntity cliente = modelMapper.map(clienteDTO, ClienteEntity.class);
 
-        // Validación de correo
-        if (clienteRepository.existsByEmail(dto.getEmail())) {
-            throw new CorreoDuplicadoException("Ya existe un cliente con el correo: " + dto.getEmail());
-        }
+        // Guardamos el cliente en la base de datos
+        ClienteEntity clienteGuardado = clienteRepository.save(cliente);
 
-        // Convertir el DTO a la entidad ClienteEntity
-        ClienteEntity entidad = modelMapper.map(dto, ClienteEntity.class);
-
-        // Guardar el cliente en la base de datos
-        ClienteEntity guardado = clienteRepository.save(entidad);
-
-        // Convertir la entidad guardada de vuelta al DTO para la respuesta
-        return modelMapper.map(guardado, ClienteDTO.class);
+        // Devolvemos el cliente guardado como DTO
+        return modelMapper.map(clienteGuardado, ClienteDTO.class);
     }
 
     @Override
