@@ -1,5 +1,6 @@
 package cl.fullstack.usuario_ms.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
@@ -18,8 +19,15 @@ public class UsuarioEntity {
     @SequenceGenerator(name = "usuario_seq", sequenceName = "USUARIO_SEQ", allocationSize = 1)
     private Long id;
     
+    @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
+
+    @Column(name = "email", nullable = false, length = 20,  unique = true)
     private String email;
+
+    @Column(name = "password", nullable = false, length = 20)
     private String password;
+
+    @Column(name = "rol", nullable = false, length = 20)
     private String rol;
 }

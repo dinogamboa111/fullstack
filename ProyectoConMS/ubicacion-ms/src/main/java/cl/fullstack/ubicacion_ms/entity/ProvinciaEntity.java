@@ -15,10 +15,11 @@ public class ProvinciaEntity {
     @Column(name = "id_provincia")
     private int idProvincia;
     
-    @Column(nullable = false)
+
+    @Column(name="nombre", nullable = false)
     private String nombre;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_region", nullable = false)
     private RegionEntity region;
 }

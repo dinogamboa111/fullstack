@@ -6,10 +6,10 @@ import lombok.Data;
 
 public class DetallePedidoDTO {
 
-    private int pedidoId;
-    private int productoId;
-    private int idDetalle;
+    private Long pedidoId;
+    private Long productoId;
+    private Long idDetalle;
     private int cantidad;
-    private int precio;
+    private double precio;
 
 }

@@ -22,15 +22,15 @@ public class PedidoEntity {
     @Column(name = "id_pedido")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_seq")
     @SequenceGenerator(name = "pedido_seq", sequenceName = "PEDIDO_SEQ", allocationSize = 1)
-    private int idPedido;
+    private Long idPedido;
 
     @Column(name = "rut_cliente", nullable = false)
     private int rutCliente;
 
-    @Column(name = "dv_cliente", nullable = false)
+    @Column(name = "id_movimiento", nullable = false)
     private int idMovimiento;
 
-    @Column(name = "nombre_cliente", nullable = false)
-    private String idUsuario;
+    @Column(name = "id_usuario", nullable = false)
+    private int idUsuario;
 
 }

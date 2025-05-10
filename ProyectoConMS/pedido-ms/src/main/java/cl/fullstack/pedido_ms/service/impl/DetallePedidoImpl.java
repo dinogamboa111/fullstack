@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import cl.fullstack.pedido_ms.dto.DetallePedidoDTO;
 import cl.fullstack.pedido_ms.entity.DetallePedidoEntity;
-import cl.fullstack.pedido_ms.entity.DetallePedidoId;
+import cl.fullstack.pedido_ms.entity.DetallePedidoKey;
 import cl.fullstack.pedido_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.pedido_ms.repository.DetallePedidoRepository;
 import cl.fullstack.pedido_ms.service.IDetallePedidoService;
@@ -28,7 +28,7 @@ public class DetallePedidoImpl implements IDetallePedidoService {
         DetallePedidoEntity entity = new DetallePedidoEntity();
 
         // Construimos la clave compuesta
-        DetallePedidoId id = new DetallePedidoId();
+        DetallePedidoKey id = new DetallePedidoKey();
         id.setPedidoId(dto.getPedidoId());
         id.setProductoId(dto.getProductoId());
 
@@ -42,7 +42,7 @@ public class DetallePedidoImpl implements IDetallePedidoService {
     }
 
     @Override
-    public DetallePedidoDTO getDetallePedidoById(DetallePedidoId id) {
+    public DetallePedidoDTO getDetallePedidoById(DetallePedidoKey id) {
         DetallePedidoEntity entity = detallePedidoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Detalle pedido no encontrado con ID: " + id));
         return modelMapper.map(entity, DetallePedidoDTO.class);
@@ -56,7 +56,7 @@ public class DetallePedidoImpl implements IDetallePedidoService {
     }
 
     @Override
-    public DetallePedidoDTO updateDetallePedido(DetallePedidoId id, DetallePedidoDTO dto) {
+    public DetallePedidoDTO updateDetallePedido(DetallePedidoKey id, DetallePedidoDTO dto) {
         detallePedidoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Detalle pedido no encontrado con ID: " + id));
 
@@ -71,7 +71,7 @@ public class DetallePedidoImpl implements IDetallePedidoService {
     }
 
     @Override
-    public void deleteDetallePedido(DetallePedidoId id) {
+    public void deleteDetallePedido(DetallePedidoKey id) {
         DetallePedidoEntity entity = detallePedidoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Detalle pedido no encontrado con ID: " + id));
         detallePedidoRepository.delete(entity);

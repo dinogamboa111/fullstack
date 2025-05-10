@@ -4,6 +4,10 @@ import lombok.Data;
 
 @Data
 public class ProductoDTO {
+
+
+
+
     private Long id;
     private String nombre;
     private String descripcion;
@@ -16,4 +20,5 @@ public class ProductoDTO {
     //sirve realmente que es representar solo los datos que vamos a transferir, mientras que la logica de la entidad
     // y relaciones se manejan en los service o repository
     private Long idProveedor; // Referencia  proveedor
+    
 }

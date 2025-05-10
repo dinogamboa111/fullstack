@@ -15,10 +15,12 @@ public class ComunaEntity {
     @Column(name = "id_comuna")
     private int idComuna;
     
-    @Column(nullable = false)
+    // no agregue  length  porque hay que revisar lo que permita los datos
+    @Column(name="nombre", nullable = false)
     private String nombre;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+     // no agregue  length  porque hay que revisar lo que permita los datos
     @JoinColumn(name = "id_provincia", nullable = false)
     private ProvinciaEntity provincia;
 }

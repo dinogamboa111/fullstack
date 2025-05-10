@@ -15,7 +15,7 @@ public class RegionEntity {
     @Column(name = "id_region")  
     private int idRegion;  
     
-    @Column(nullable = false)
+    @Column(name="nombre", nullable = false)
     private String nombre;
 }
 

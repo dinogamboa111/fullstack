@@ -8,6 +8,6 @@ public interface ICategoriaService {
     List<CategoriaDTO> getAllCategorias();
     CategoriaDTO getCategoriaById(Long id);
     CategoriaDTO createCategoria(CategoriaDTO categoriaDTO);
-    CategoriaDTO updateCategoria(Long id, CategoriaDTO categoriaDTO);
+    CategoriaDTO updateCategoria(Long id, CategoriaDTO  categoriaDTO);
     void deleteCategoria(Long id);
 }

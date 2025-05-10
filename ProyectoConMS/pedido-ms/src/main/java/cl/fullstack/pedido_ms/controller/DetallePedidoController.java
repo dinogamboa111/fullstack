@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import cl.fullstack.pedido_ms.dto.DetallePedidoDTO;
-import cl.fullstack.pedido_ms.entity.DetallePedidoId;
+import cl.fullstack.pedido_ms.entity.DetallePedidoKey;
 import cl.fullstack.pedido_ms.service.IDetallePedidoService;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class DetallePedidoController {
 
     @GetMapping("/{pedidoId}/{productoId}")
     public DetallePedidoDTO getDetallePedidoById(@PathVariable int pedidoId, @PathVariable int productoId) {
-        DetallePedidoId id = new DetallePedidoId(pedidoId, productoId);
+        DetallePedidoKey id = new DetallePedidoKey(pedidoId, productoId);
         return detallePedidoService.getDetallePedidoById(id);
     }
 
@@ -38,13 +38,13 @@ public class DetallePedidoController {
             @PathVariable int productoId,
             @RequestBody DetallePedidoDTO detallePedidoDTO) {
 
-        DetallePedidoId id = new DetallePedidoId(pedidoId, productoId);
+        DetallePedidoKey id = new DetallePedidoKey(pedidoId, productoId);
         return detallePedidoService.updateDetallePedido(id, detallePedidoDTO);
     }
 
     @DeleteMapping("/{pedidoId}/{productoId}")
     public void deleteDetallePedido(@PathVariable int pedidoId, @PathVariable int productoId) {
-        DetallePedidoId id = new DetallePedidoId(pedidoId, productoId);
+        DetallePedidoKey id = new DetallePedidoKey(pedidoId, productoId);
         detallePedidoService.deleteDetallePedido(id);
     }
 }

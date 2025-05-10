@@ -6,9 +6,9 @@ import lombok.Data;
 
 public class PedidoDTO {
 
-    private int idPedido;
+    private Long idPedido;
     private int rutCliente;
-    private int idMovimiento;
+    private Long idMovimiento;
     private int idUsuario;
 
 }
