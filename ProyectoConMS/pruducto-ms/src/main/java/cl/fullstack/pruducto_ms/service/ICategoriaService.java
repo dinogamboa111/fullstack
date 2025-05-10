@@ -6,8 +6,8 @@ import cl.fullstack.pruducto_ms.dto.CategoriaDTO;
 
 public interface ICategoriaService {
     List<CategoriaDTO> getAllCategorias();
-    CategoriaDTO getCategoriaById(Long id);
+    CategoriaDTO getCategoriaById(int id);
     CategoriaDTO createCategoria(CategoriaDTO categoriaDTO);
-    CategoriaDTO updateCategoria(Long id, CategoriaDTO  categoriaDTO);
-    void deleteCategoria(Long id);
+    CategoriaDTO updateCategoria(int id, CategoriaDTO  categoriaDTO);
+    void deleteCategoria(int id);
 }

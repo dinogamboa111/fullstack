@@ -26,14 +26,8 @@ public class DetallePedidoImpl implements IDetallePedidoService {
     @Override
     public DetallePedidoDTO createDetallePedido(DetallePedidoDTO dto) {
         DetallePedidoEntity entity = new DetallePedidoEntity();
-
-        // Construimos la clave compuesta
-        DetallePedidoKey id = new DetallePedidoKey();
-        id.setPedidoId(dto.getPedidoId());
-        id.setProductoId(dto.getProductoId());
-
-        entity.setId(id);
-        entity.setIdDetalle(dto.getIdDetalle());
+        entity.setPedidoId(dto.getPedidoId());
+        entity.setProductoId(dto.getProductoId());
         entity.setCantidad(dto.getCantidad());
         entity.setPrecio(dto.getPrecio());
 
@@ -57,12 +51,10 @@ public class DetallePedidoImpl implements IDetallePedidoService {
 
     @Override
     public DetallePedidoDTO updateDetallePedido(DetallePedidoKey id, DetallePedidoDTO dto) {
-        detallePedidoRepository.findById(id)
+        DetallePedidoEntity entity = detallePedidoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Detalle pedido no encontrado con ID: " + id));
 
-        DetallePedidoEntity entity = new DetallePedidoEntity();
-        entity.setId(id);
-        entity.setIdDetalle(dto.getIdDetalle());
+        // Actualizamos solo los campos que se pueden modificar
         entity.setCantidad(dto.getCantidad());
         entity.setPrecio(dto.getPrecio());
 

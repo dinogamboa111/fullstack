@@ -20,7 +20,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public UsuarioDTO getUsuarioById(@PathVariable Long id) {
+    public UsuarioDTO getUsuarioById(@PathVariable int id) {
         return usuarioService.getUsuarioById(id);
     }
 
@@ -30,12 +30,12 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public UsuarioDTO updateUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+    public UsuarioDTO updateUsuario(@PathVariable int id, @RequestBody UsuarioDTO usuarioDTO) {
         return usuarioService.updateUsuario(id, usuarioDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Long id) {
+    public void deleteUsuario(@PathVariable int id) {
         usuarioService.deleteUsuario(id);
     }
 }

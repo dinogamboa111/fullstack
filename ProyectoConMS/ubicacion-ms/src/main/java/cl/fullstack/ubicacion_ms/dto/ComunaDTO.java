@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ComunaDTO {
+    
     private int idComuna;
     private String nombre;
     private ProvinciaDTO provincia; // Relacion con ProvinciaDTO

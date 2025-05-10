@@ -29,7 +29,7 @@ public class ProveedorServiceImpl implements IProveedorService {
     }
 
     @Override
-    public ProveedorDTO getProveedorById(Long id) {
+    public ProveedorDTO getProveedorById(int id) {
         ProveedorEntity proveedor = proveedorRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Proveedor no encontrado con ID: " + id));
         return modelMapper.map(proveedor, ProveedorDTO.class);
@@ -43,7 +43,7 @@ public class ProveedorServiceImpl implements IProveedorService {
     }
 
     @Override
-    public ProveedorDTO updateProveedor(Long id, ProveedorDTO dto) {
+    public ProveedorDTO updateProveedor(int id, ProveedorDTO dto) {
         proveedorRepository.findById(id)
           .orElseThrow(() -> new RecursoNoEncontradoException("Proveedor no encontrado con ID: " + id));
         dto.setId(id); // aseguramos que no cambie el ID
@@ -52,7 +52,7 @@ public class ProveedorServiceImpl implements IProveedorService {
     }
 
     @Override
-    public void deleteProveedor(Long id) {
+    public void deleteProveedor(int id) {
         ProveedorEntity proveedor = proveedorRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Proveedor no encontrado con ID: " + id));
         proveedorRepository.delete(proveedor);

@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,15 +25,17 @@ public class PedidoEntity {
     @Column(name = "id_pedido")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_seq")
     @SequenceGenerator(name = "pedido_seq", sequenceName = "PEDIDO_SEQ", allocationSize = 1)
-    private Long idPedido;
+    private int idPedido;
 
     @Column(name = "rut_cliente", nullable = false)
     private int rutCliente;
 
-    @Column(name = "id_movimiento", nullable = false)
-    private int idMovimiento;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_movimiento", nullable = false)
+    private TipoMovimientoEntity idMovimiento;
 
     @Column(name = "id_usuario", nullable = false)
     private int idUsuario;
 
 }
+

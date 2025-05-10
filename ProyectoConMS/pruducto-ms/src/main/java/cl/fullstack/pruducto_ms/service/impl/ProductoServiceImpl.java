@@ -30,7 +30,7 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public ProductoDTO getProductoById(Long id) {
+    public ProductoDTO getProductoById(int id) {
         ProductoEntity producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
         return modelMapper.map(producto, ProductoDTO.class);
@@ -44,7 +44,7 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public ProductoDTO updateProducto(Long id, ProductoDTO dto) {
+    public ProductoDTO updateProducto(int id, ProductoDTO dto) {
         productoRepository.findById(id)
           .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
         dto.setId(id); // aseguramos que no cambie el ID
@@ -53,7 +53,7 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public void deleteProducto(Long id) {
+    public void deleteProducto(int id) {
         ProductoEntity producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
         productoRepository.delete(producto);

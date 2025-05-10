@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import cl.fullstack.pruducto_ms.entity.CategoriaEntity;
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<CategoriaEntity, Long> {
+public interface CategoriaRepository extends JpaRepository<CategoriaEntity, Integer> {
 }

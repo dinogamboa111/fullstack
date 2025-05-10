@@ -19,7 +19,7 @@ public class ClienteEntity {
     @Column(name = "rut_cliente")
     private int rutCliente;
 
-    @Column(name = "dv_cliente", nullable = false, length = 1)
+    @Column(name = "dv_cliente", nullable = false)
     private char dvCliente;
 
     @Column(name = "nombre_cliente", nullable = false, length = 20)

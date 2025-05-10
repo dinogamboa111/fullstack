@@ -29,7 +29,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
     }
 
     @Override
-    public CategoriaDTO getCategoriaById(Long id) {
+    public CategoriaDTO getCategoriaById(int id) {
         CategoriaEntity categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + id));
         return modelMapper.map(categoria, CategoriaDTO.class);
@@ -43,7 +43,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
     }
 
     @Override
-    public CategoriaDTO updateCategoria(Long id, CategoriaDTO dto) {
+    public CategoriaDTO updateCategoria(int id, CategoriaDTO dto) {
         categoriaRepository.findById(id)
           .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + id));
         dto.setId(id); // aseguramos que no cambie el ID
@@ -52,7 +52,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
     }
 
     @Override
-    public void deleteCategoria(Long id) {
+    public void deleteCategoria(int id) {
         CategoriaEntity categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + id));
         categoriaRepository.delete(categoria);
