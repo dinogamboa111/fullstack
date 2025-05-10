@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/provincias")
+@RequestMapping("/api/provincias")
 public class ProvinciaController {
 
     @Autowired
@@ -17,8 +17,7 @@ public class ProvinciaController {
 
     @PostMapping
     public ResponseEntity<ProvinciaDTO> crearProvincia(@RequestBody ProvinciaDTO provincia) {
-        ProvinciaDTO nuevaProvincia = provinciaService.crearProvincia(provincia);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaProvincia);
+        return ResponseEntity.status(HttpStatus.CREATED).body(provinciaService.crearProvincia(provincia));
     }
 
     @GetMapping

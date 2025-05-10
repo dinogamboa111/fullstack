@@ -1,6 +1,7 @@
 package cl.fullstack.cliente_ms.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import cl.fullstack.cliente_ms.dto.ClienteDTO;
 import cl.fullstack.cliente_ms.entity.ClienteEntity;
+import cl.fullstack.cliente_ms.exception.CorreoDuplicadoException;
 import cl.fullstack.cliente_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.cliente_ms.repository.ClienteRepository;
 import cl.fullstack.cliente_ms.service.IClienteService;
@@ -26,8 +28,24 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     public ClienteDTO crearCliente(ClienteDTO dto) {
-        ClienteEntity cliente = modelMapper.map(dto, ClienteEntity.class);
-        return modelMapper.map(clienteRepository.save(cliente), ClienteDTO.class);
+        // Validación de RUT
+        if (clienteRepository.existsByRutCliente(dto.getRutCliente())) {
+            throw new CorreoDuplicadoException("Ya existe un cliente con el RUT: " + dto.getRutCliente());
+        }
+
+        // Validación de correo
+        if (clienteRepository.existsByEmail(dto.getEmail())) {
+            throw new CorreoDuplicadoException("Ya existe un cliente con el correo: " + dto.getEmail());
+        }
+
+        // Convertir el DTO a la entidad ClienteEntity
+        ClienteEntity entidad = modelMapper.map(dto, ClienteEntity.class);
+
+        // Guardar el cliente en la base de datos
+        ClienteEntity guardado = clienteRepository.save(entidad);
+
+        // Convertir la entidad guardada de vuelta al DTO para la respuesta
+        return modelMapper.map(guardado, ClienteDTO.class);
     }
 
     @Override
@@ -46,10 +64,24 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     public ClienteDTO actualizarCliente(int rut, ClienteDTO dto) {
-        clienteRepository.findById(rut)
-          .orElseThrow(() -> new RecursoNoEncontradoException("Cliente no encontrado con RUT: " + rut));
-        dto.setRutCliente(rut); // aseguramos que no cambie el RUT
+        // Verificamos si el cliente existe con el RUT
+        ClienteEntity clienteExistente = clienteRepository.findByRutCliente(rut)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Cliente no encontrado con RUT: " + rut));
+
+        // Verificamos si el correo ya está registrado con otro RUT antes de la
+        // conversión
+        Optional<ClienteEntity> clienteConCorreo = clienteRepository.findByEmail(dto.getEmail());
+
+        // Si el correo está registrado con otro RUT, lanzamos una excepción
+        if (clienteConCorreo.isPresent() && clienteConCorreo.get().getRutCliente() != rut) {
+            throw new CorreoDuplicadoException("El correo electrónico ya está registrado con otro RUT.");
+        }
+
+        // Convertimos el DTO a la entidad y actualizamos los datos
         ClienteEntity actualizado = modelMapper.map(dto, ClienteEntity.class);
+        actualizado.setRutCliente(rut); // Aseguramos que el RUT se mantenga consistente
+
+        // Guardamos los cambios en la base de datos
         return modelMapper.map(clienteRepository.save(actualizado), ClienteDTO.class);
     }
 
@@ -58,5 +90,6 @@ public class ClienteServiceImpl implements IClienteService {
         ClienteEntity cliente = clienteRepository.findById(rut)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Cliente no encontrado con RUT: " + rut));
         clienteRepository.delete(cliente);
+    }
+
 }
-}   

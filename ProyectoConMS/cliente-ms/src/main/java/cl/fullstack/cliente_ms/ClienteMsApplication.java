@@ -17,6 +17,5 @@ public class ClienteMsApplication {
 	@Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
-	}
-
+    }
 }

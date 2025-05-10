@@ -1,10 +1,11 @@
 package cl.fullstack.pedido_ms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import cl.fullstack.pedido_ms.dto.TipoMovimientoDTO;
-
 import cl.fullstack.pedido_ms.service.ITipoMovimientoService;
 
 import java.util.List;
@@ -17,29 +18,31 @@ public class TipoMovimientoController {
     private ITipoMovimientoService tipoMovimientoService;
 
     @GetMapping
-    public List<TipoMovimientoDTO> getAllTipoMovimiento() {
-        return tipoMovimientoService.getAllTipoMovimientos();
+    public ResponseEntity<List<TipoMovimientoDTO>> getAllTipoMovimientos() {
+        return ResponseEntity.ok(tipoMovimientoService.getAllTipoMovimientos());
     }
 
     @GetMapping("/{idTipoMovimiento}")
-    public TipoMovimientoDTO getTipoMovimientoById(@PathVariable int idTipoMovimiento) {
-        return tipoMovimientoService.getTipoMovimientoById(idTipoMovimiento);
+    public ResponseEntity<TipoMovimientoDTO> getTipoMovimientoById(@PathVariable int idTipoMovimiento) {
+        return ResponseEntity.ok(tipoMovimientoService.getTipoMovimientoById(idTipoMovimiento));
     }
 
     @PostMapping
-    public TipoMovimientoDTO createUsuario(@RequestBody TipoMovimientoDTO tipoMovimientoDTO) {
-        return tipoMovimientoService.createTipoMovimiento(tipoMovimientoDTO);
+    public ResponseEntity<TipoMovimientoDTO> createTipoMovimiento(@RequestBody TipoMovimientoDTO tipoMovimientoDTO) {
+        TipoMovimientoDTO nuevo = tipoMovimientoService.createTipoMovimiento(tipoMovimientoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
     }
 
     @PutMapping("/{idTipoMovimiento}")
-    public TipoMovimientoDTO updateUsuario(@PathVariable int idTipoMovimiento,
+    public ResponseEntity<TipoMovimientoDTO> updateTipoMovimiento(
+            @PathVariable int idTipoMovimiento,
             @RequestBody TipoMovimientoDTO tipoMovimientoDTO) {
-        return tipoMovimientoService.updateTipoMovimiento(idTipoMovimiento, tipoMovimientoDTO);
+        return ResponseEntity.ok(tipoMovimientoService.updateTipoMovimiento(idTipoMovimiento, tipoMovimientoDTO));
     }
 
     @DeleteMapping("/{idTipoMovimiento}")
-    public void deleteUsuario(@PathVariable int idTipoMovimiento) {
+    public ResponseEntity<Void> deleteTipoMovimiento(@PathVariable int idTipoMovimiento) {
         tipoMovimientoService.deleteTipoMovimiento(idTipoMovimiento);
+        return ResponseEntity.noContent().build();
     }
-
 }

@@ -1,5 +1,8 @@
 package cl.fullstack.pruducto_ms.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import cl.fullstack.pruducto_ms.dto.ProductoDTO;
@@ -14,29 +17,29 @@ public class ProductoController {
     @Autowired
     private IProductoService productoService;
 
-    
     @GetMapping
-    public List<ProductoDTO> getAllProductos() {
-        return productoService.getAllProductos();
+    public ResponseEntity<List<ProductoDTO>> getAllProductos() {
+        return ResponseEntity.ok(productoService.getAllProductos());
     }
 
     @GetMapping("/{id}")
-    public ProductoDTO getProductoById(@PathVariable Long id) {
-        return productoService.getProductoById(id);
+    public ResponseEntity<ProductoDTO> getProductoById(@PathVariable Long id) {
+        return ResponseEntity.ok(productoService.getProductoById(id));
     }
 
     @PostMapping
-    public ProductoDTO createProducto(@RequestBody ProductoDTO productoDTO) {
-        return productoService.createProducto(productoDTO);
+    public ResponseEntity<ProductoDTO> createProducto(@RequestBody ProductoDTO productoDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoService.createProducto(productoDTO));
     }
 
     @PutMapping("/{id}")
-    public ProductoDTO updateProducto(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
-        return productoService.updateProducto(id, productoDTO);
+    public ResponseEntity<ProductoDTO> updateProducto(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
+        return ResponseEntity.ok(productoService.updateProducto(id, productoDTO));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProducto(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProducto(@PathVariable Long id) {
         productoService.deleteProducto(id);
+        return ResponseEntity.noContent().build();
     }
 }
