@@ -31,6 +31,6 @@ public class PedidoEntity {
     private int idMovimiento;
 
     @Column(name = "nombre_cliente", nullable = false)
-    private int idUsuario;
+    private String idUsuario;
 
 }

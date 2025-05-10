@@ -10,6 +10,7 @@ public class CategoriaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_seq")
+   
 
     //sirve para generar desde aca la seq de numeracion automatica, pasa que oracle no soporta generation type solo
     @SequenceGenerator(name = "categoria_seq", sequenceName = "CATEGORIA_SEQ", allocationSize = 1)
