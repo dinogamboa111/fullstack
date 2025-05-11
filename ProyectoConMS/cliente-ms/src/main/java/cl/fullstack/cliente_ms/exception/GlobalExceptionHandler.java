@@ -1,5 +1,6 @@
 package cl.fullstack.cliente_ms.exception;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,13 +35,13 @@ public class GlobalExceptionHandler {
     }
 
     // Manejo general para cualquier otra excepción no controlada
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String, String>> handleGeneralException(Exception ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", "Error interno del servidor");
-        error.put("mensaje", ex.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    // @ExceptionHandler(Exception.class)
+    // public ResponseEntity<Map<String, String>> handleGeneralException(Exception ex) {
+    //     Map<String, String> error = new HashMap<>();
+    //     error.put("error", "Error interno del servidor");
+    //     error.put("mensaje", ex.getMessage());
+    //     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
 
     @ExceptionHandler(CorreoDuplicadoException.class)
     public ResponseEntity<Map<String, String>> handleCorreoDuplicado(CorreoDuplicadoException ex) {
@@ -48,5 +49,23 @@ public class GlobalExceptionHandler {
         error.put("error", "Correo duplicado");
         error.put("mensaje", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DatosInvalidosException.class)
+    public ResponseEntity<Map<String, Object>> manejarDatosInvalidos(DatosInvalidosException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("mensaje", ex.getMessage());
+        error.put("fecha", LocalDateTime.now());
+        error.put("codigo", HttpStatus.BAD_REQUEST.value());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(RecursoDuplicadoException.class)
+    public ResponseEntity<Map<String, Object>> manejarRecursoDuplicado(RecursoDuplicadoException ex) {
+        Map<String, Object> error = new HashMap<>();
+        error.put("mensaje", ex.getMessage());
+        error.put("fecha", LocalDateTime.now());
+        error.put("codigo", HttpStatus.CONFLICT.value());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }
