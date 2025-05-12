@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 
 @Data
 @Entity
-@Table(name = "DETALLE_PEDIDO")
+@Table(name = "detalle_pedido")
 public class DetallePedidoEntity {
 
     @EmbeddedId

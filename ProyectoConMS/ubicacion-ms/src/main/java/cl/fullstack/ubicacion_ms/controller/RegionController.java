@@ -14,11 +14,10 @@ public class RegionController {
 
     @Autowired
     private IRegionService regionService;
-
+    
     @PostMapping
     public ResponseEntity<RegionDTO> crearRegion(@RequestBody RegionDTO region) {
-        RegionDTO nuevaRegion = regionService.crearRegion(region);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaRegion);
+        return ResponseEntity.status(HttpStatus.CREATED).body(regionService.crearRegion(region));
     }
 
     @GetMapping

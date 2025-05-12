@@ -2,6 +2,8 @@ package cl.fullstack.pruducto_ms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import cl.fullstack.pruducto_ms.dto.ProveedorDTO;
 import cl.fullstack.pruducto_ms.service.IProveedorService;
@@ -16,27 +18,28 @@ public class ProveedorController {
     private IProveedorService proveedorService;
 
     @GetMapping
-    public List<ProveedorDTO> getAllProveedores() {
-        return proveedorService.getAllProveedores();
+    public ResponseEntity<List<ProveedorDTO>> getAllProveedores() {
+        return ResponseEntity.ok(proveedorService.getAllProveedores());
     }
 
     @GetMapping("/{id}")
-    public ProveedorDTO getProveedorById(@PathVariable Long id) {
-        return proveedorService.getProveedorById(id);
+    public ResponseEntity<ProveedorDTO> getProveedorById(@PathVariable Long id) {
+        return ResponseEntity.ok(proveedorService.getProveedorById(id));
     }
 
     @PostMapping
-    public ProveedorDTO createProveedor(@RequestBody ProveedorDTO proveedorDTO) {
-        return proveedorService.createProveedor(proveedorDTO);
+    public ResponseEntity<ProveedorDTO> createProveedor(@RequestBody ProveedorDTO proveedorDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(proveedorService.createProveedor(proveedorDTO));
     }
 
     @PutMapping("/{id}")
-    public ProveedorDTO updateProveedor(@PathVariable Long id, @RequestBody ProveedorDTO proveedorDTO) {
-        return proveedorService.updateProveedor(id, proveedorDTO);
+    public ResponseEntity<ProveedorDTO> updateProveedor(@PathVariable Long id, @RequestBody ProveedorDTO proveedorDTO) {
+        return ResponseEntity.ok(proveedorService.updateProveedor(id, proveedorDTO));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProveedor(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProveedor(@PathVariable Long id) {
         proveedorService.deleteProveedor(id);
+        return ResponseEntity.noContent().build();
     }
 }

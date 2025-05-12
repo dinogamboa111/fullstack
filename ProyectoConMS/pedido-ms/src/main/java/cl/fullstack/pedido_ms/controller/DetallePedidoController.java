@@ -1,6 +1,8 @@
 package cl.fullstack.pedido_ms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import cl.fullstack.pedido_ms.dto.DetallePedidoDTO;
@@ -17,34 +19,35 @@ public class DetallePedidoController {
     private IDetallePedidoService detallePedidoService;
 
     @GetMapping
-    public List<DetallePedidoDTO> getAllDetallePedidos() {
-        return detallePedidoService.getAllDetallePedidos();
+    public ResponseEntity<List<DetallePedidoDTO>> getAllDetallePedidos() {
+        return ResponseEntity.ok(detallePedidoService.getAllDetallePedidos());
     }
 
     @GetMapping("/{pedidoId}/{productoId}")
-    public DetallePedidoDTO getDetallePedidoById(@PathVariable int pedidoId, @PathVariable int productoId) {
+    public ResponseEntity<DetallePedidoDTO> getDetallePedidoById(@PathVariable int pedidoId, @PathVariable int productoId) {
         DetallePedidoId id = new DetallePedidoId(pedidoId, productoId);
-        return detallePedidoService.getDetallePedidoById(id);
+        return ResponseEntity.ok(detallePedidoService.getDetallePedidoById(id));
     }
 
     @PostMapping
-    public DetallePedidoDTO createDetallePedido(@RequestBody DetallePedidoDTO detallePedidoDTO) {
-        return detallePedidoService.createDetallePedido(detallePedidoDTO);
+    public ResponseEntity<DetallePedidoDTO> createDetallePedido(@RequestBody DetallePedidoDTO detallePedidoDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(detallePedidoService.createDetallePedido(detallePedidoDTO));
     }
 
     @PutMapping("/{pedidoId}/{productoId}")
-    public DetallePedidoDTO updateDetallePedido(
+    public ResponseEntity<DetallePedidoDTO> updateDetallePedido(
             @PathVariable int pedidoId,
             @PathVariable int productoId,
             @RequestBody DetallePedidoDTO detallePedidoDTO) {
 
         DetallePedidoId id = new DetallePedidoId(pedidoId, productoId);
-        return detallePedidoService.updateDetallePedido(id, detallePedidoDTO);
+        return ResponseEntity.ok(detallePedidoService.updateDetallePedido(id, detallePedidoDTO));
     }
 
     @DeleteMapping("/{pedidoId}/{productoId}")
-    public void deleteDetallePedido(@PathVariable int pedidoId, @PathVariable int productoId) {
+    public ResponseEntity<Void> deleteDetallePedido(@PathVariable int pedidoId, @PathVariable int productoId) {
         DetallePedidoId id = new DetallePedidoId(pedidoId, productoId);
         detallePedidoService.deleteDetallePedido(id);
+        return ResponseEntity.noContent().build();
     }
 }

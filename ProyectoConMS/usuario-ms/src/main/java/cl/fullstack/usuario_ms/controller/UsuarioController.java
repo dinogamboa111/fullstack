@@ -3,6 +3,8 @@ package cl.fullstack.usuario_ms.controller;
 import cl.fullstack.usuario_ms.dto.UsuarioDTO;
 import cl.fullstack.usuario_ms.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,27 +17,28 @@ public class UsuarioController {
     private IUsuarioService usuarioService;
 
     @GetMapping
-    public List<UsuarioDTO> getAllUsuarios() {
-        return usuarioService.getAllUsuarios();
+    public ResponseEntity<List<UsuarioDTO>> getAllUsuarios() {
+        return ResponseEntity.ok(usuarioService.getAllUsuarios());
     }
 
     @GetMapping("/{id}")
-    public UsuarioDTO getUsuarioById(@PathVariable Long id) {
-        return usuarioService.getUsuarioById(id);
+    public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioService.getUsuarioById(id));
     }
 
     @PostMapping
-    public UsuarioDTO createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        return usuarioService.createUsuario(usuarioDTO);
+    public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.createUsuario(usuarioDTO));
     }
 
     @PutMapping("/{id}")
-    public UsuarioDTO updateUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
-        return usuarioService.updateUsuario(id, usuarioDTO);
+    public ResponseEntity<UsuarioDTO> updateUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        return ResponseEntity.ok(usuarioService.updateUsuario(id, usuarioDTO));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUsuario(@PathVariable Long id) {
         usuarioService.deleteUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 }

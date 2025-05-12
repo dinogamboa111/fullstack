@@ -9,16 +9,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/comunas")
+@RequestMapping("/api/comunas")
 public class ComunaController {
 
     @Autowired
     private IComunaService comunaService;
 
+    // @PostMapping
+    // public ResponseEntity<ComunaDTO> crearComuna(@RequestBody ComunaDTO comuna) {
+    //     ComunaDTO nuevaComuna = comunaService.crearComuna(comuna);
+    //     return ResponseEntity.status(HttpStatus.CREATED).body(nuevaComuna);
+    // }
+    // linea de codigo de mas, en usar un nuevaComuna, desp te explico en clase si lees esto jaime   
     @PostMapping
     public ResponseEntity<ComunaDTO> crearComuna(@RequestBody ComunaDTO comuna) {
-        ComunaDTO nuevaComuna = comunaService.crearComuna(comuna);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaComuna);
+        return ResponseEntity.status(HttpStatus.CREATED).body(comunaService.crearComuna(comuna));
     }
 
     @GetMapping
