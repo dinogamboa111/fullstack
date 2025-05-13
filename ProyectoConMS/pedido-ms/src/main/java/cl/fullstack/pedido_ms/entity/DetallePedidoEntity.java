@@ -14,7 +14,7 @@ import jakarta.persistence.*;
 public class DetallePedidoEntity {
 
     @EmbeddedId
-    private DetallePedidoId id;
+    private DetallePedidoKey id;
 
     @Column(name = "id_detalle", nullable = false)
     private int idDetalle;
