@@ -33,7 +33,7 @@ public class ProvinciaServiceImpl implements IProvinciaService {
         }
         
         // Validar que la region exista
-        RegionEntity regionEntity = regionRepository.findById(provinciaDTO.getRegion().getIdRegion())
+        RegionEntity regionEntity = regionRepository.findById(provinciaDTO.getIdRegion().getIdRegion())
                 .orElseThrow(() -> new RecursoNoEncontradoException("La region asociada no existe"));
 
         ProvinciaEntity entity = modelMapper.map(provinciaDTO, ProvinciaEntity.class);

@@ -33,7 +33,7 @@ public class ComunaServiceImpl implements IComunaService {
         }
         
         // Validar que la provincia exista
-        ProvinciaEntity provinciaEntity = provinciaRepository.findById(comunaDTO.getProvincia().getIdProvincia())
+        ProvinciaEntity provinciaEntity = provinciaRepository.findById(comunaDTO.getIdProvincia().getIdProvincia())
                 .orElseThrow(() -> new RecursoNoEncontradoException("La provincia asociada no existe"));
 
         ComunaEntity entity = modelMapper.map(comunaDTO, ComunaEntity.class);
