@@ -33,11 +33,11 @@ public class ComunaServiceImpl implements IComunaService {
         }
         
         // Validar que la provincia exista
-        ProvinciaEntity provinciaEntity = provinciaRepository.findById(comunaDTO.getProvincia().getIdProvincia())
+        ProvinciaEntity provinciaEntity = provinciaRepository.findById(comunaDTO.getIdProvincia().getIdProvincia())
                 .orElseThrow(() -> new RecursoNoEncontradoException("La provincia asociada no existe"));
 
         ComunaEntity entity = modelMapper.map(comunaDTO, ComunaEntity.class);
-        entity.setProvincia(provinciaEntity); // Asignar la entidad de provincia
+        entity.setIdProvincia(provinciaEntity); // Asignar la entidad de provincia
         ComunaEntity savedEntity = comunaRepository.save(entity);
         return modelMapper.map(savedEntity, ComunaDTO.class);
     }
