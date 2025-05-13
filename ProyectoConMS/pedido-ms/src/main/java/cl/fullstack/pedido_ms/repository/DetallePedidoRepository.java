@@ -6,9 +6,14 @@ import org.springframework.stereotype.Repository;
 import cl.fullstack.pedido_ms.entity.DetallePedidoEntity;
 import cl.fullstack.pedido_ms.entity.DetallePedidoKey;
 
+
 //usaria key o llave, asi se entiende que es una contruccion de id
 
 @Repository
+
 public interface DetallePedidoRepository extends JpaRepository<DetallePedidoEntity, DetallePedidoKey> {
+
+public interface DetallePedidoRepository extends JpaRepository<DetallePedidoEntity,DetallePedidoKey> {
+
 
 }

@@ -12,11 +12,21 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class DetallePedidoKey implements Serializable {
 
     @Column(name = "pedido_id")
     private int pedidoId;
 
     @Column(name = "producto_id")
+
+
+public class DetallePedidoKey implements Serializable {
+
+    @Column(name = "PEDIDO_id_pedido")
+    private int pedidoId;
+
+    @Column(name = "PRODUCTO_id_producto")
+
     private int productoId;
-}
+
