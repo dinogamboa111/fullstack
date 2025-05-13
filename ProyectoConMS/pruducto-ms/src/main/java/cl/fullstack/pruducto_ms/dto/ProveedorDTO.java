@@ -7,5 +7,7 @@ public class ProveedorDTO {
     private Long id;
     private String nombre;
     private String telefono;
-    private String direccion;
+    private String numCalle;
+    private String nombreCalle;
+    private int idComuna;
 }
