@@ -11,7 +11,6 @@ import cl.fullstack.pedido_ms.entity.DetallePedidoKey;
 
 @Repository
 
-public interface DetallePedidoRepository extends JpaRepository<DetallePedidoEntity, DetallePedidoKey> {
 
 public interface DetallePedidoRepository extends JpaRepository<DetallePedidoEntity,DetallePedidoKey> {
 
