@@ -27,10 +27,10 @@ public class PedidoEntity {
     @Column(name = "rut_cliente", nullable = false)
     private int rutCliente;
 
-    @Column(name = "dv_cliente", nullable = false)
+    @Column(name = "id_movimiento", nullable = false)
     private int idMovimiento;
 
-    @Column(name = "nombre_cliente", nullable = false)
+    @Column(name = "id_usuario", nullable = false)
     private String idUsuario;
 
 }

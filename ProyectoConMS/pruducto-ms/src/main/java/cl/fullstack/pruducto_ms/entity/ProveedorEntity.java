@@ -10,13 +10,26 @@ public class ProveedorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proveedor_seq")
-    
 
-    //sirve para generar desde aca la seq de numeracion automatica, pasa que oracle no soporta generation type solo
+    // sirve para generar desde aca la seq de numeracion automatica, pasa que oracle
+    // no soporta generation type solo
     @SequenceGenerator(name = "proveedor_seq", sequenceName = "PROVEEDOR_SEQ", allocationSize = 1)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @Column(name = "telefono", nullable = false)
     private String telefono;
-    private String direccion;
+
+    @Column(name = "num_calle", nullable = false)
+    private String numCalle;
+
+    @Column(name = "nombre_calle", nullable = false)
+    private String nombreCalle;
+
+    @Column(name = "id_comuna", nullable = false)
+    private int idComuna;
+
 }
