@@ -37,7 +37,7 @@ public class ProvinciaServiceImpl implements IProvinciaService {
                 .orElseThrow(() -> new RecursoNoEncontradoException("La region asociada no existe"));
 
         ProvinciaEntity entity = modelMapper.map(provinciaDTO, ProvinciaEntity.class);
-        entity.setRegion(regionEntity); // Asignar la entidad de region
+        entity.setIdRegion(regionEntity); // Asignar la entidad de region
         ProvinciaEntity savedEntity = provinciaRepository.save(entity);
         return modelMapper.map(savedEntity, ProvinciaDTO.class);
     }
