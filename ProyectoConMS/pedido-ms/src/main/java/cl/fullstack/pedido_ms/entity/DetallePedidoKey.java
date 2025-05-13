@@ -13,12 +13,7 @@ import jakarta.persistence.Embeddable;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class DetallePedidoKey implements Serializable {
 
-    @Column(name = "pedido_id")
-    private int pedidoId;
-
-    @Column(name = "producto_id")
 
 
 public class DetallePedidoKey implements Serializable {
@@ -30,3 +25,4 @@ public class DetallePedidoKey implements Serializable {
 
     private int productoId;
 
+}
