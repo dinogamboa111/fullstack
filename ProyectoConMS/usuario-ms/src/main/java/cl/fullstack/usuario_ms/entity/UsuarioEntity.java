@@ -19,7 +19,7 @@ public class UsuarioEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq")
     @SequenceGenerator(name = "usuario_seq", sequenceName = "USUARIO_SEQ", allocationSize = 1)
     @Column(name = "id")
-    private Long id;
+    private int id;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;

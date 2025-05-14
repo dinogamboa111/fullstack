@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IUsuarioService {
     List<UsuarioDTO> getAllUsuarios();
-    UsuarioDTO getUsuarioById(Long id);
+    UsuarioDTO getUsuarioById(int id);
     UsuarioDTO createUsuario(UsuarioDTO usuarioDTO);
-    UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO);
-    void deleteUsuario(Long id);
+    UsuarioDTO updateUsuario(int id, UsuarioDTO usuarioDTO);
+    void deleteUsuario(int id);
 }

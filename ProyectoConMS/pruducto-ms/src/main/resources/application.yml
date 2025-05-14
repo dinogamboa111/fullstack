@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: producto-service
+    name: pruducto-ms
 
   datasource:
     url: jdbc:oracle:thin:@207.231.108.32:49161/xe
@@ -19,3 +19,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8900/eureka
+
+logging:
+  level:
+    org.springframework.cloud.client.discovery: DEBUG
+    org.springframework.web.client: DEBUG

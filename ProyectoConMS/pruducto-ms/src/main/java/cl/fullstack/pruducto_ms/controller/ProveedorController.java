@@ -23,7 +23,7 @@ public class ProveedorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProveedorDTO> getProveedorById(@PathVariable Long id) {
+    public ResponseEntity<ProveedorDTO> getProveedorById(@PathVariable int id) {
         return ResponseEntity.ok(proveedorService.getProveedorById(id));
     }
 
@@ -33,12 +33,12 @@ public class ProveedorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProveedorDTO> updateProveedor(@PathVariable Long id, @RequestBody ProveedorDTO proveedorDTO) {
+    public ResponseEntity<ProveedorDTO> updateProveedor(@PathVariable int id, @RequestBody ProveedorDTO proveedorDTO) {
         return ResponseEntity.ok(proveedorService.updateProveedor(id, proveedorDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProveedor(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProveedor(@PathVariable int id) {
         proveedorService.deleteProveedor(id);
         return ResponseEntity.noContent().build();
     }

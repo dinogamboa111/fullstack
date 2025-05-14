@@ -24,22 +24,20 @@ public class DetallePedidoImpl implements IDetallePedidoService {
     private ModelMapper modelMapper;
 
     @Override
-    public DetallePedidoDTO createDetallePedido(DetallePedidoDTO dto) {
-        DetallePedidoEntity entity = new DetallePedidoEntity();
+public DetallePedidoDTO createDetallePedido(DetallePedidoDTO dto) {
+    DetallePedidoEntity entity = new DetallePedidoEntity();
 
-        // Construimos la clave compuesta
-        DetallePedidoKey id = new DetallePedidoKey();
-        id.setPedidoId(dto.getPedidoId());
-        id.setProductoId(dto.getProductoId());
+    // Asignamos las claves primarias
+    entity.setPedidoId(dto.getPedidoId());  // asigna pedidoId
+    entity.setProductoId(dto.getProductoId());  // asigna productoId
+    entity.setIdDetalle(dto.getIdDetalle());
+    entity.setCantidad(dto.getCantidad());
+    entity.setPrecio(dto.getPrecio());
 
-        entity.setId(id);
-        entity.setIdDetalle(dto.getIdDetalle());
-        entity.setCantidad(dto.getCantidad());
-        entity.setPrecio(dto.getPrecio());
+    DetallePedidoEntity saved = detallePedidoRepository.save(entity);
+    return modelMapper.map(saved, DetallePedidoDTO.class);
+}
 
-        DetallePedidoEntity saved = detallePedidoRepository.save(entity);
-        return modelMapper.map(saved, DetallePedidoDTO.class);
-    }
 
     @Override
     public DetallePedidoDTO getDetallePedidoById(DetallePedidoKey id) {
@@ -54,21 +52,25 @@ public class DetallePedidoImpl implements IDetallePedidoService {
                 .map(entity -> modelMapper.map(entity, DetallePedidoDTO.class))
                 .collect(Collectors.toList());
     }
+@Override
+public DetallePedidoDTO updateDetallePedido(DetallePedidoKey id, DetallePedidoDTO dto) {
+    // Buscamos el detalle de pedido con la clave compuesta
+    DetallePedidoEntity entity = detallePedidoRepository.findById(id)
+            .orElseThrow(() -> new RecursoNoEncontradoException("Detalle pedido no encontrado con ID: " + id));
 
-    @Override
-    public DetallePedidoDTO updateDetallePedido(DetallePedidoKey id, DetallePedidoDTO dto) {
-        detallePedidoRepository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException("Detalle pedido no encontrado con ID: " + id));
+    // Actualizamos los campos de la entidad
+    entity.setPedidoId(id.getPedidoId());  // asignamos el pedidoId
+    entity.setProductoId(id.getProductoId());  // asignamos el productoId
+    entity.setIdDetalle(dto.getIdDetalle());
+    entity.setCantidad(dto.getCantidad());
+    entity.setPrecio(dto.getPrecio());
 
-        DetallePedidoEntity entity = new DetallePedidoEntity();
-        entity.setId(id);
-        entity.setIdDetalle(dto.getIdDetalle());
-        entity.setCantidad(dto.getCantidad());
-        entity.setPrecio(dto.getPrecio());
+    // Guardamos la entidad actualizada
+    DetallePedidoEntity updated = detallePedidoRepository.save(entity);
 
-        DetallePedidoEntity updated = detallePedidoRepository.save(entity);
-        return modelMapper.map(updated, DetallePedidoDTO.class);
-    }
+    // Devolvemos el DTO actualizado
+    return modelMapper.map(updated, DetallePedidoDTO.class);
+}
 
     @Override
     public void deleteDetallePedido(DetallePedidoKey id) {
