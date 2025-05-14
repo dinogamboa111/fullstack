@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ProvinciaRepository extends JpaRepository<ProvinciaEntity, Integer> {
-    List<ProvinciaEntity> findByRegionIdRegion(int idRegion); // Busca por ID de region
+    List<ProvinciaEntity> findByIdRegion_IdRegion(int idRegion); // Busca por ID de region
 }

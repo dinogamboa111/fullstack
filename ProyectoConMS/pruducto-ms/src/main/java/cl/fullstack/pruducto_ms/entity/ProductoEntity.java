@@ -34,11 +34,9 @@ public class ProductoEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    @Column(name = "categoria", nullable = false)
     private CategoriaEntity categoria;
 
     @ManyToOne
     @JoinColumn(name = "id_proveedor")
-    @Column(name = "proveedor", nullable = false)
-    private ProveedorEntity proveedor;
+    private ProveedorEntity idProveedor;
 }
