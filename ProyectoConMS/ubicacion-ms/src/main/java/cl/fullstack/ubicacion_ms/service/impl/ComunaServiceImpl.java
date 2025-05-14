@@ -51,7 +51,7 @@ public class ComunaServiceImpl implements IComunaService {
 
     @Override
     public List<ComunaDTO> obtenerComunasPorProvincia(int idProvincia) {
-        return comunaRepository.findByProvinciaIdProvincia(idProvincia).stream()
+        return comunaRepository.findByIdProvincia_IdProvincia(idProvincia).stream()
                 .map(entity -> modelMapper.map(entity, ComunaDTO.class))
                 .collect(Collectors.toList());
     }
