@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import cl.fullstack.pruducto_ms.entity.ProveedorEntity;
 
 @Repository
-public interface ProveedorRepository extends JpaRepository<ProveedorEntity, Long> {
+public interface ProveedorRepository extends JpaRepository<ProveedorEntity, Integer> {
 }

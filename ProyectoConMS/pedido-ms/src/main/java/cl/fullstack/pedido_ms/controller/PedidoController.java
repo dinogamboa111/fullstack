@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import cl.fullstack.pedido_ms.client.ProductoClient;
 import cl.fullstack.pedido_ms.dto.PedidoDTO;
+import cl.fullstack.pedido_ms.dto.ProductoDTO;
 import cl.fullstack.pedido_ms.service.IPedidoService;
 
 import java.util.List;
@@ -41,5 +43,17 @@ public class PedidoController {
     public ResponseEntity<Void> deletePedido(@PathVariable int idPedido) {
         pedidoService.deletePedido(idPedido);
         return ResponseEntity.noContent().build();
+    }
+
+
+    
+    //METODO DE PRUEBA PARA COMPROBAR CONEXION CON PRODUCTO-MS TRAYENDO TODOS LOS PRODUCTOS DISPONIBLES EN ESE MS
+    @Autowired
+    private ProductoClient productoClient;
+
+    @GetMapping("/productos")
+    public ResponseEntity<List<ProductoDTO>> listarProductosDesdeProductoMs() {
+        List<ProductoDTO> productos = productoClient.obtenerTodosLosProductos();
+        return ResponseEntity.ok(productos);
     }
 }
