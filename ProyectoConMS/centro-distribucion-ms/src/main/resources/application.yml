@@ -1,0 +1,25 @@
+server:
+  port: 9020 
+  
+  error:
+    include-stacktrace: never    #Se agrega esta linea para no obtener errores stack trace
+                                 #para no exponer el codigo.
+ 
+spring:
+  application:
+    name: centro-distribucion-service
+
+  datasource:
+    url: jdbc:oracle:thin:@207.231.108.32:49161/xe
+    username: apex_us_dsy_08_cool_dino
+    password: macarena
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8900/eureka
