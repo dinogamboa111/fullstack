@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Data // genera getters, setters y otros metodos automaticamente
 @NoArgsConstructor // genera constructor vacio
 @AllArgsConstructor // genera constructor con todos los campos
+
 @Entity // indica que esta clase es una entidad para la base de datos
 @Table(name = "Zona_Logistica_Comuna") // define el nombre de la tabla en la base
 

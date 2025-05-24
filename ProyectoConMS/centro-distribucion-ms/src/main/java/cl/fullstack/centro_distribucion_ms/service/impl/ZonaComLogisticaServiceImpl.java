@@ -26,7 +26,7 @@ public class ZonaComLogisticaServiceImpl implements IZonaComLogisticaService {
     private ModelMapper modelMapper; // convierte entre dto y entity
 
     @Autowired
-    private RestTemplate restTemplate; // para hacer peticiones http a otros servicios
+    private RestTemplate restTemplate; // para hacer peticiones http a otros servicios, en esta caso declarada en resttemplateconfig/RestTemplateConfig
 
     private static final String UBICACION_MS_API = "http://ubicacion-ms/api/comunas/"; // url base del servicio ubicacion-ms
 
