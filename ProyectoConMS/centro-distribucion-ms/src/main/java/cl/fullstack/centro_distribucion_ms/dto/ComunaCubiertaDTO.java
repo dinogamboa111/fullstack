@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 
 public class ComunaCubiertaDTO {
 
-    //private Long id; // id unico de la relacion comuna-centro
-
     private int idCentro; // id del centro de distribucion asociado
 
     private int idComuna; // id de la comuna cubierta
