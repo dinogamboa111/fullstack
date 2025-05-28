@@ -8,7 +8,7 @@ spring:
   datasource: 
     url: jdbc:oracle:thin:@207.231.108.32:49161/xe 
     username: apex_us_dsy_08_cool_dino 
-    password: macarena 
+    password: macarena
 
   jpa:
     hibernate:
@@ -22,5 +22,5 @@ eureka:
 
 logging:
   level:
-    org.springframework.cloud.client.discovery: DEBUG
-    org.springframework.web.client: DEBUG
+   org.springframework.cloud.client.discovery: DEBUG
+   org.springframework.web.client: DEBUG
