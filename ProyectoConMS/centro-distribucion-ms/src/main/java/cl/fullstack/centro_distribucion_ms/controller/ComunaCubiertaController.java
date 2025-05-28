@@ -34,16 +34,16 @@ public class ComunaCubiertaController {
         return ResponseEntity.ok(lista);
     }
 
-    // endpoint get para buscar una comuna cubierta por idcentro e idcomuna
-    @GetMapping("/buscar")
-    public ResponseEntity<ComunaCubiertaDTO> obtenerPorId(
-            @RequestParam int idCentro,
-            @RequestParam int idComuna) {
-        // llama al servicio para obtener una comuna cubierta especifica
-        ComunaCubiertaDTO dto = comunaCubiertaService.obtenerPorId(idCentro, idComuna);
-        // devuelve el dto con estado ok
-        return ResponseEntity.ok(dto);
-    }
+    // // endpoint get para buscar una comuna cubierta por idcentro e idcomuna
+    // @GetMapping("/buscar")
+    // public ResponseEntity<ComunaCubiertaDTO> obtenerPorId(
+    //         @RequestParam int idCentro,
+    //         @RequestParam int idComuna) {
+    //     // llama al servicio para obtener una comuna cubierta especifica
+    //     ComunaCubiertaDTO dto = comunaCubiertaService.obtenerPorId(idCentro, idComuna);
+    //     // devuelve el dto con estado ok
+    //     return ResponseEntity.ok(dto);
+    // }
 
     // endpoint delete para eliminar una comuna cubierta por body json con idcentro e idcomuna
     @DeleteMapping

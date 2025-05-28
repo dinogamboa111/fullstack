@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController // indica que esta clase es un controlador rest
-@RequestMapping("api/centros-distribucion") // ruta base del controlador
+@RequestMapping("/api/centros-distribucion") // ruta base del controlador
 public class CentroDistribucionController {
 
     @Autowired
