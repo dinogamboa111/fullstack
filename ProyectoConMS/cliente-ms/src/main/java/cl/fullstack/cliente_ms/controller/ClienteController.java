@@ -29,7 +29,8 @@ public class ClienteController {
     private IClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> crear(/* @Valid */ @RequestBody ClienteDTO dto /* , BindingResult result */) {
+    public ResponseEntity<ClienteDTO> crear(/* @Valid */ @RequestBody ClienteDTO dto 
+                                                        /* , BindingResult result */) {
 
         /*
          * if (result.hasErrors()) { // si capta un error de validacion procede con el
