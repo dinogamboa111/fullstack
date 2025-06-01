@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cl.fullstack</groupId>
-	<artifactId>cliente-ms</artifactId>
+	<artifactId>ubicacion-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cliente-ms</name>
+	<name>ubicacion-ms</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>

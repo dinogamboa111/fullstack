@@ -1,9 +1,13 @@
 server:
-  port: 8955
-
+  port: 9020 
+  
+  error:
+    include-stacktrace: never    #Se agrega esta linea para no obtener errores stack trace
+                                 #para no exponer el codigo.
+ 
 spring:
   application:
-    name: ubicacion-service
+    name: centro-distribucion-service
 
   datasource:
     url: jdbc:oracle:thin:@207.231.108.32:49161/xe
