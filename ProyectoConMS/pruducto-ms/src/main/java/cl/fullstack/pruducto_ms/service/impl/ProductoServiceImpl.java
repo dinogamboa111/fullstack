@@ -30,9 +30,9 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public ProductoDTO getProductoById(Long id) {
-        ProductoEntity producto = productoRepository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
+    public ProductoDTO getProductoById(int idProducto) {
+        ProductoEntity producto = productoRepository.findById(idProducto)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + idProducto));
         return modelMapper.map(producto, ProductoDTO.class);
     }
 
@@ -44,18 +44,18 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public ProductoDTO updateProducto(Long id, ProductoDTO dto) {
-        productoRepository.findById(id)
-          .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
-        dto.setId(id); // aseguramos que no cambie el ID
+    public ProductoDTO updateProducto(int idProducto, ProductoDTO dto) {
+        productoRepository.findById(idProducto)
+          .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + idProducto));
+        dto.setIdProducto(idProducto); // aseguramos que no cambie el ID
         ProductoEntity actualizado = modelMapper.map(dto, ProductoEntity.class);
         return modelMapper.map(productoRepository.save(actualizado), ProductoDTO.class);
     }
 
     @Override
-    public void deleteProducto(Long id) {
-        ProductoEntity producto = productoRepository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
+    public void deleteProducto(int idProducto) {
+        ProductoEntity producto = productoRepository.findById(idProducto)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + idProducto));
         productoRepository.delete(producto);
     }
 }

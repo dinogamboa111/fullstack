@@ -14,11 +14,11 @@ public class CategoriaEntity {
     // sirve para generar desde aca la seq de numeracion automatica, pasa que oracle
     // no soporta generation type solo
     @SequenceGenerator(name = "categoria_seq", sequenceName = "CATEGORIA_SEQ", allocationSize = 1)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "id_categoria")
+    private int idCategoria;
 
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
+    @Column(name = "nombre_categoria", nullable = false)
+    private String nombreCategoria;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
