@@ -22,9 +22,9 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.getAllCategorias());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoriaDTO> getCategoriaById(@PathVariable Long id) {
-        return ResponseEntity.ok(categoriaService.getCategoriaById(id));
+    @GetMapping("/{idCategoria}")
+    public ResponseEntity<CategoriaDTO> getCategoriaById(@PathVariable int idCategoria) {
+        return ResponseEntity.ok(categoriaService.getCategoriaById(idCategoria));
     }
 
     @PostMapping
@@ -32,14 +32,14 @@ public class CategoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.createCategoria(categoriaDTO));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CategoriaDTO> updateCategoria(@PathVariable Long id, @RequestBody CategoriaDTO categoriaDTO) {
-        return ResponseEntity.ok(categoriaService.updateCategoria(id, categoriaDTO));
+    @PutMapping("/{idCategoria}")
+    public ResponseEntity<CategoriaDTO> updateCategoria(@PathVariable int idCategoria, @RequestBody CategoriaDTO categoriaDTO) {
+        return ResponseEntity.ok(categoriaService.updateCategoria(idCategoria, categoriaDTO));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategoria(@PathVariable Long id) {
-        categoriaService.deleteCategoria(id);
+    @DeleteMapping("/{idCategoria}")
+    public ResponseEntity<Void> deleteCategoria(@PathVariable int idCategoria) {
+        categoriaService.deleteCategoria(idCategoria);
         return ResponseEntity.noContent().build();
     }
 }
