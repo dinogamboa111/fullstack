@@ -29,9 +29,9 @@ public class CategoriaServiceImpl implements ICategoriaService {
     }
 
     @Override
-    public CategoriaDTO getCategoriaById(Long id) {
-        CategoriaEntity categoria = categoriaRepository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + id));
+    public CategoriaDTO getCategoriaById(int idCategoria) {
+        CategoriaEntity categoria = categoriaRepository.findById(idCategoria)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + idCategoria));
         return modelMapper.map(categoria, CategoriaDTO.class);
     }
 
@@ -43,18 +43,18 @@ public class CategoriaServiceImpl implements ICategoriaService {
     }
 
     @Override
-    public CategoriaDTO updateCategoria(Long id, CategoriaDTO dto) {
-        categoriaRepository.findById(id)
-          .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + id));
-        dto.setId(id); // aseguramos que no cambie el ID
+    public CategoriaDTO updateCategoria(int idCategoria, CategoriaDTO dto) {
+        categoriaRepository.findById(idCategoria)
+          .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + idCategoria));
+        dto.setIdCategoria(idCategoria); // aseguramos que no cambie el ID
         CategoriaEntity actualizado = modelMapper.map(dto, CategoriaEntity.class);
         return modelMapper.map(categoriaRepository.save(actualizado), CategoriaDTO.class);
     }
 
     @Override
-    public void deleteCategoria(Long id) {
-        CategoriaEntity categoria = categoriaRepository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + id));
+    public void deleteCategoria(int idCategoria) {
+        CategoriaEntity categoria = categoriaRepository.findById(idCategoria)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrada con ID: " + idCategoria));
         categoriaRepository.delete(categoria);
     }
 }
