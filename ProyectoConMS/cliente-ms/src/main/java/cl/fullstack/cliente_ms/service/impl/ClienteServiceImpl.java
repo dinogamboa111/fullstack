@@ -29,9 +29,11 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     public ClienteDTO crearCliente(ClienteDTO dto) {
+        System.out.println("hola 2");
         // validamos si existe ya el rut en la bbdd
         if (clienteRepository.verificarExistenciaPorRut(dto.getRutCliente())) { // existBy da error por diversos motivos, asi que hice la consulta con una query y la guarde en el metodo que estoy aplicando aqui
             throw new RecursoDuplicadoException("Ya existe un cliente con el RUT: " + dto.getRutCliente());
+
         }
 
         // Verifica si el correo ya está registrado
