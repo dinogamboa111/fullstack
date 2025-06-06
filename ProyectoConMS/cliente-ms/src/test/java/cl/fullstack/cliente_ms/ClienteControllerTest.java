@@ -40,7 +40,7 @@ public class ClienteControllerTest { // Clase de prueba para el controlador Clie
 
     private final String BASE_URL = "/api/clientes"; // Ruta base común usada en las peticiones
 
-    private void imprimirEncabezado(String nombreTest) { // Método auxiliar para imprimir un encabezado por consola
+    private void imprimirEncabezado(String nombreTest) { // imprimir un encabezado por consola
         System.out.println("\n===========================");
         System.out.println("=== Ejecutando test: " + nombreTest + " ===");
         System.out.println("===========================\n");
