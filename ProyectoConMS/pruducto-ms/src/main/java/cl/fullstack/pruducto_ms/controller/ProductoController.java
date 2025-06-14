@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import cl.fullstack.pruducto_ms.dto.ProductoDTO;
 import cl.fullstack.pruducto_ms.service.IProductoService;
+import jakarta.validation.Valid;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -23,23 +26,28 @@ public class ProductoController {
     }
 
     @GetMapping("/{idProducto}")
-    public ResponseEntity<ProductoDTO> getProductoById(@PathVariable int idProducto) {
-        return ResponseEntity.ok(productoService.getProductoById(idProducto));
+    public ResponseEntity<ProductoDTO> obtenerProducto(@PathVariable int idProducto) {
+        return ResponseEntity.ok(productoService.obtenerProducto(idProducto));
     }
 
     @PostMapping
-    public ResponseEntity<ProductoDTO> createProducto(@RequestBody ProductoDTO productoDTO) {
+    public ResponseEntity<ProductoDTO> createProducto( @Valid @RequestBody ProductoDTO productoDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productoService.createProducto(productoDTO));
     }
 
     @PutMapping("/{idProducto}")
-    public ResponseEntity<ProductoDTO> updateProducto(@PathVariable int idProducto, @RequestBody ProductoDTO productoDTO) {
-        return ResponseEntity.ok(productoService.updateProducto(idProducto, productoDTO));
+    public ResponseEntity<ProductoDTO> actualizarProducto(@PathVariable int idProducto, @RequestBody ProductoDTO productoDTO) {
+        return ResponseEntity.ok(productoService.actualizarProducto(idProducto, productoDTO));
     }
+@DeleteMapping("/{idProducto}")
+public ResponseEntity<Map<String, Object>> eliminarProducto(@PathVariable int idProducto) {
+    ProductoDTO dto = productoService.eliminarProducto(idProducto);
 
-    @DeleteMapping("/{idProducto}")
-    public ResponseEntity<Void> deleteProducto(@PathVariable int idProducto) {
-        productoService.deleteProducto(idProducto);
-        return ResponseEntity.noContent().build();
-    }
+    Map<String, Object> respuesta = new HashMap<>();
+    respuesta.put("mensaje", "Producto eliminado correctamente");
+    respuesta.put("producto", dto);
+
+    return ResponseEntity.ok(respuesta);
+}
+
 }
