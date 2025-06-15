@@ -22,12 +22,12 @@ public class CategoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.crearCategoria(categoriaDTO));
     }
 
-    // eliminar catgoria
-    @DeleteMapping("/{idCategoria}")
-    public ResponseEntity<String> eliminarCategoria(@PathVariable int idCategoria) {
-        String mensaje = categoriaService.eliminarCategoria(idCategoria);
-        return ResponseEntity.ok(mensaje);
-    }
+    // eliminar catgoria-- se comenta ya que al eliminar este dato afectariamos la integridad de datos de la tabla producto
+    // @DeleteMapping("/{idCategoria}")
+    // public ResponseEntity<String> eliminarCategoria(@PathVariable int idCategoria) {
+    //     String mensaje = categoriaService.eliminarCategoria(idCategoria);
+    //     return ResponseEntity.ok(mensaje);
+    // }
 
     // modificar categoria
     @PutMapping("/{idCategoria}")
