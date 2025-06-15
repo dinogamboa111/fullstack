@@ -1,5 +1,4 @@
-package cl.fullstack.pruducto_ms.client;
-
+package cl.fullstack.pedido_ms.client;
 
 import java.util.List;
 
@@ -9,30 +8,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import cl.fullstack.pruducto_ms.dto.ClienteDTO;
+import cl.fullstack.pedido_ms.dto.ComunaDTO;
 
 import org.springframework.http.HttpMethod;
 
 //service marca esta clase como un componente de servicio de spring. asi se detecta automaticamente en el escaneo y se registra como bean
 @Service
-//esta clase ClienteClient se encarga de comunicarse con cliente-ms
-public class ClienteClient {
+//esta clase ProductoClient se encarga de comunicarse con producto-ms
+public class UbicacionClient {
     //aqui estamos inyectando automaticamente el restemplate q configuramos en RestTemplateConfig
     @Autowired
     private RestTemplate restTemplate;
     
     //aqui hacemos una llamada get a la url 
-    public ClienteDTO obtenerClienteByRut(int clienteRut) {
-        return restTemplate.getForObject("http://cliente-service/api/clientes/" + clienteRut, ClienteDTO.class);
+    public ComunaDTO obtenerComunasById(int comunaId) {
+        return restTemplate.getForObject("http://ubicacion-ms/api/comunas/" + comunaId, ComunaDTO.class);
     }
     //tambien hace una llamada get a la url, pero obtenienndo todos en una lista, se usa .exchange porque getForObjet no doporta tipos genericos como List<ProductoDTO>
-    public List<ClienteDTO> obtenerTodosLosProductos() {
-        ResponseEntity<List<ClienteDTO>> response = restTemplate.exchange(
-            "http://cliente-service/api/clientes",
+    public List<ComunaDTO> obtenerTodosLasComunas() {
+        ResponseEntity<List<ComunaDTO>> response = restTemplate.exchange(
+            "http://ubicacion-ms/api/comunas/",
             HttpMethod.GET,
             null,
-            //este new le dice a spring que espere una lista de productodto
-            new ParameterizedTypeReference<List<ClienteDTO>>() {}
+            //este new le dice a spring que espere una lista de comunaDTO
+            new ParameterizedTypeReference<List<ComunaDTO>>() {}
         );
         return response.getBody();
     }

@@ -9,5 +9,5 @@ public interface ICategoriaService {
     CategoriaDTO obtenerCategoria(int idCategoria);
     CategoriaDTO crearCategoria(CategoriaDTO categoriaDTO);
     CategoriaDTO actualizarCategoria(int idCategoria, CategoriaDTO categoriaDTO);
-    CategoriaDTO eliminarCategoria(int idCategoria);
+    String eliminarCategoria(int idCategoria);
 }

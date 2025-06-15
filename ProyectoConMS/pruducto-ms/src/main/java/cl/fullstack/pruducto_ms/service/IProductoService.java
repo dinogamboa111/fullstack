@@ -11,5 +11,5 @@ public interface IProductoService {
     ProductoDTO obtenerProducto(int idProducto);
     ProductoDTO createProducto(ProductoDTO productoDTO);
     ProductoDTO actualizarProducto(int idProducto, ProductoDTO productoDTO);
-    ProductoDTO eliminarProducto(int idProducto);
+    String eliminarProducto(int idProducto);
 }
