@@ -5,9 +5,9 @@ import java.util.List;
 import cl.fullstack.pruducto_ms.dto.CategoriaDTO;
 
 public interface ICategoriaService {
-    List<CategoriaDTO> getAllCategorias();
-    CategoriaDTO getCategoriaById(int idCategoria);
-    CategoriaDTO createCategoria(CategoriaDTO categoriaDTO);
-    CategoriaDTO updateCategoria(int idCategoria, CategoriaDTO categoriaDTO);
-    void deleteCategoria(int idCategoria);
+    List<CategoriaDTO> listarCategorias();
+    CategoriaDTO obtenerCategoria(int idCategoria);
+    CategoriaDTO crearCategoria(CategoriaDTO categoriaDTO);
+    CategoriaDTO actualizarCategoria(int idCategoria, CategoriaDTO categoriaDTO);
+    String eliminarCategoria(int idCategoria);
 }
