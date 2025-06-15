@@ -3,6 +3,8 @@ package cl.fullstack.usuario_ms.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +31,8 @@ public class UsuarioEntity {
 
     @Column(name = "password", nullable = false)
     private String password;
-    
-    @Column(name = "rol", nullable = false)
-    private String rol;
+
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
+    private RolEntity rol;
 }
