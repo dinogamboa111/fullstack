@@ -17,16 +17,11 @@ public class ProductoEntity {
     @Column(name = "nombre_producto", nullable = false)
     private String nombreProducto;
 
-
-    @Column(name = "id_cliente", nullable=false)
+    @Column(name = "id_cliente", nullable = false)
     private int idCliente;
 
-   // @ManyToOne
-    //@JoinColumn(name = "id_categoria")
-    //private CategoriaEntity idCategoria;
-@Column(name = "id_categoria", nullable=false)
-    private int idCategoria;
- 
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", nullable = false)
+    private CategoriaEntity categoria;
+
 }
-
-

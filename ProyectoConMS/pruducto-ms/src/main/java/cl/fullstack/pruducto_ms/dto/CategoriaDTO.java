@@ -1,6 +1,5 @@
 package cl.fullstack.pruducto_ms.dto;
 
-
 import lombok.Data;
 
 @Data

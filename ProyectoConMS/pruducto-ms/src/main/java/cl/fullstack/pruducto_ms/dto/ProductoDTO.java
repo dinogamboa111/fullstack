@@ -1,10 +1,13 @@
 package cl.fullstack.pruducto_ms.dto;
 
+
 import lombok.Data;
 
 @Data
 public class ProductoDTO {
-    private int idProducto;
+
+
+    private int idProducto;  
     private String nombreProducto;
     private int idCliente;
     private int idCategoria; // Referencia  categoria, solo buscamos transmiutir una simplificacion de datos

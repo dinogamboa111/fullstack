@@ -1,4 +1,4 @@
-package cl.fullstack.ubicacion_ms.dto;
+package cl.fullstack.pedido_ms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class ComunaDTO {
     private int idComuna;
     private String nombre;
-    private ProvinciaDTO idProvincia; // Relacion con ProvinciaDTO
-
+    private int idProvincia; // Relacion con ProvinciaDTO
 }
