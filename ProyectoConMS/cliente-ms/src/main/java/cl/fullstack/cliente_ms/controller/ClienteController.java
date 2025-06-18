@@ -50,7 +50,7 @@ public class ClienteController {
         ClienteDTO creado = clienteService.crearCliente(dto); // si no hay errores desp de todo, llama al servicio
                                                               // "crearCliente" quien lo guarda en la bbdd, pueden ver
                                                               // el metodo que contiene validaciones propias en SERVICE
-        return ResponseEntity.status(HttpStatus.OK).body(creado); // retorna un gttp 201 que significa que se creo,
+        return ResponseEntity.status(HttpStatus.CREATED).body(creado); // retorna un gttp 201 que significa que se creo,
                                                                        // y
                                                                        // pasa el dto creado en el body, osea en postman
                                                                        // saldra el body que se logro crear, igual si lo
