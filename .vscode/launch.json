@@ -1,58 +1,58 @@
 {
-    "configurations": [
-        {
-            "type": "java",
-
-            "name": "UbicacionMsApplication",
-            "request": "launch",
-            "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication"
-
-            "name": "PedidoMsApplication",
-            "request": "launch",
-            "mainClass": "cl.fullstack.pedido_ms.PedidoMsApplication",
-            "projectName": "pedido-ms"
-
-        },
-        {
-            "type": "java",
-            "name": "PruductoMsApplication",
-            "request": "launch",
-            "mainClass": "cl.fullstack.pruducto_ms.PruductoMsApplication",
-            "projectName": "pruducto-ms"
-        },
-        {
-            "type": "java",
-            "name": "EurekaserverApplication",
-            "request": "launch",
-            "mainClass": "cl.fullstack.eurekaserver.EurekaserverApplication",
-            "projectName": "eurekaserver"
-        },
-        {
-            "type": "java",
-            "name": "UsuarioMsApplication",
-            "request": "launch",
-            "mainClass": "cl.fullstack.usuario_ms.UsuarioMsApplication",
-            "projectName": ""
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-ClienteMsApplication<cliente-ms>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "cl.fullstack.cliente_ms.ClienteMsApplication",
-            "projectName": "cliente-ms",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-UbicacionMsApplication<ubicacion-ms>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication",
-            "projectName": "ubicacion-ms",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        }
-    ]
+  "configurations": [
+    {
+      "type": "java",
+      "name": "UbicacionMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication"
+    },
+    {
+      "type": "java",
+      "name": "PedidoMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.pedido_ms.PedidoMsApplication",
+      "projectName": "pedido-ms"
+    },
+    {
+      "type": "java",
+      "name": "PruductoMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.pruducto_ms.PruductoMsApplication",
+      "projectName": "pruducto-ms"
+    },
+    {
+      "type": "java",
+      "name": "EurekaserverApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.eurekaserver.EurekaserverApplication",
+      "projectName": "eurekaserver"
+    },
+    {
+      "type": "java",
+      "name": "UsuarioMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.usuario_ms.UsuarioMsApplication",
+      "projectName": ""
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-ClienteMsApplication<cliente-ms>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "cl.fullstack.cliente_ms.ClienteMsApplication",
+      "projectName": "cliente-ms",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-UbicacionMsApplication<ubicacion-ms>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication",
+      "projectName": "ubicacion-ms",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
 }

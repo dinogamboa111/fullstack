@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @Slf4j
+// Activa el logger SLF4J para usar log.info, log.debug, etc.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 // Indica que el test arrancará el servidor Spring Boot en un puerto fijo (no
@@ -73,36 +73,47 @@ public class ClienteMsApplicationTests {
         // Valida que el servidor respondió con HTTP 201 Created, lo que indica éxito al
         // crear.
 
-        assertThat(response.getBody()).isNotNull();
-        // Verifica que el cuerpo de la respuesta no sea nulo.
+        ClienteDTO clienteResponse = response.getBody();
+        // Obtiene el cuerpo de la respuesta, que es un ClienteDTO (puede ser null).
 
-        assertThat(response.getBody().getRutCliente()).isEqualTo(TEST_RUT);
+        assertThat(clienteResponse).isNotNull();
+        // Verifica que el cuerpo de la respuesta no sea null.
+
+        assertThat(clienteResponse.getRutCliente()).isEqualTo(TEST_RUT);
         // Verifica que el cliente creado tenga el mismo RUT que el enviado.
     }
 
     @Test
     @Order(2)
+    // Segundo test que se ejecuta: obtener cliente por RUT.
+
     void testObtenerCliente() {
+
+        System.out.println("Test empieza");
         ResponseEntity<ClienteDTO> response = restTemplate.getForEntity(
                 getUrl("/" + TEST_RUT),
                 ClienteDTO.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isNotNull();
 
-        // log.info("Cliente obtenido: {}", response.getBody());
-        System.out.println(" Cliente obtenido:\n" + response.getBody());
+        ClienteDTO clienteResponse = response.getBody();
 
-        assertThat(response.getBody().getNombreCliente()).isEqualTo("Juan");
+        assertThat(clienteResponse).isNotNull();
+
+        log.info("Cliente obtenido: {}", clienteResponse);
+        // Esto imprime el cliente obtenido usando el logger SLF4J.
+
+        assertThat(clienteResponse.getNombreCliente()).isEqualTo("Juan");
     }
-
-
 
     @Test
     @Order(3)
     // Tercer test que elimina el cliente creado.
 
     void testEliminarCliente() {
+
+        System.out.println("Test empieza");
+
         restTemplate.delete(getUrl("/" + TEST_RUT));
         // Hace una petición DELETE a /api/clientes/11222333 para eliminar el cliente.
 
