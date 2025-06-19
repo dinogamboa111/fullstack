@@ -14,13 +14,7 @@ public class ComunaController {
 
     @Autowired
     private IComunaService comunaService;
-
-    // @PostMapping
-    // public ResponseEntity<ComunaDTO> crearComuna(@RequestBody ComunaDTO comuna) {
-    //     ComunaDTO nuevaComuna = comunaService.crearComuna(comuna);
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(nuevaComuna);
-    // }
-    // linea de codigo de mas, en usar un nuevaComuna, desp te explico en clase si lees esto jaime   
+   
     @PostMapping
     public ResponseEntity<ComunaDTO> crearComuna(@RequestBody ComunaDTO comuna) {
         return ResponseEntity.status(HttpStatus.CREATED).body(comunaService.crearComuna(comuna));
@@ -46,4 +40,9 @@ public class ComunaController {
         comunaService.eliminarComuna(idComuna);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{idComuna}")
+public ResponseEntity<ComunaDTO> actualizarComuna(@PathVariable int idComuna, @RequestBody ComunaDTO comuna) {
+    return ResponseEntity.ok(comunaService.actualizarComuna(idComuna, comuna));
+}
 }

@@ -9,4 +9,6 @@ public interface IComunaService {
     List<ComunaDTO> obtenerComunasPorProvincia(int idProvincia);
     ComunaDTO obtenerComunaPorId(int idComuna);
     void eliminarComuna(int idComuna);
+
+    ComunaDTO actualizarComuna(int idComuna, ComunaDTO comunaDTO);
 }
