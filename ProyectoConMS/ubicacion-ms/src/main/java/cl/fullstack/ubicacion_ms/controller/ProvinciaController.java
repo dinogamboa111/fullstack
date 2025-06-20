@@ -40,4 +40,10 @@ public class ProvinciaController {
         provinciaService.eliminarProvincia(idProvincia);
         return ResponseEntity.noContent().build();
     }
+@PutMapping("/{idProvincia}")  //nuevo put ojito
+public ResponseEntity<ProvinciaDTO> actualizarProvincia(@PathVariable int idProvincia, @RequestBody ProvinciaDTO provincia) {
+    return ResponseEntity.ok(provinciaService.actualizarProvincia(idProvincia, provincia));
+}
+
+
 }

@@ -35,4 +35,8 @@ public class RegionController {
         regionService.eliminarRegion(idRegion);
         return ResponseEntity.noContent().build();
     }
+@PutMapping("/{idRegion}")
+public ResponseEntity<RegionDTO> actualizarRegion(@PathVariable int idRegion, @RequestBody RegionDTO region) {
+    return ResponseEntity.ok(regionService.actualizarRegion(idRegion, region));
+}
 }

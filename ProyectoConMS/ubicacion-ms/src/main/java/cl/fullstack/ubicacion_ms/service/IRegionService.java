@@ -8,4 +8,6 @@ public interface IRegionService {
     List<RegionDTO> obtenerRegiones();
     RegionDTO obtenerRegionPorId(int idRegion);
     void eliminarRegion(int idRegion);
+
+    RegionDTO actualizarRegion(int idRegion, RegionDTO regionDTO);
 }

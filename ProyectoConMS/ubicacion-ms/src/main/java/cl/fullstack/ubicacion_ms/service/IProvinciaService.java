@@ -9,4 +9,6 @@ public interface IProvinciaService {
     List<ProvinciaDTO> obtenerProvinciasPorRegion(int idRegion);
     ProvinciaDTO obtenerProvinciaPorId(int idProvincia);
     void eliminarProvincia(int idProvincia);
+
+    ProvinciaDTO actualizarProvincia(int idProvincia, ProvinciaDTO provinciaDTO); 
 }
