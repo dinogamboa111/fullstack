@@ -11,7 +11,7 @@ public interface ProvinciaRepository extends JpaRepository<ProvinciaEntity, Inte
 
     // Evita duplicados por nombre (case-insensitive) dentro de una misma region
     Optional<ProvinciaEntity> findByNombreIgnoreCaseAndRegionIdRegion(String nombre, int idRegion);
-=======
+
     List<ProvinciaEntity> findByIdRegion_IdRegion(int idRegion); // Busca por ID de region
 
 }

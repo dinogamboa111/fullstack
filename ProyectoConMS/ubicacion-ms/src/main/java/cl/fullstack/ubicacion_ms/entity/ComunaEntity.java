@@ -20,5 +20,5 @@ public class ComunaEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_provincia", nullable = false)
-    private ProvinciaEntity idProvincia;
+    private ProvinciaEntity provincia;
 }
