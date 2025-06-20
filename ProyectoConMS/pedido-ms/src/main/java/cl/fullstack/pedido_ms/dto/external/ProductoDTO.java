@@ -1,4 +1,4 @@
-package cl.fullstack.pedido_ms.dto;
+package cl.fullstack.pedido_ms.dto.external;
 
 import lombok.Data;
 

@@ -8,7 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import cl.fullstack.pedido_ms.dto.ClienteDTO;
+import cl.fullstack.pedido_ms.dto.external.ClienteDTO;
+
 import org.springframework.http.HttpMethod;
 
 //service marca esta clase como un componente de servicio de spring. asi se detecta automaticamente en el escaneo y se registra como bean

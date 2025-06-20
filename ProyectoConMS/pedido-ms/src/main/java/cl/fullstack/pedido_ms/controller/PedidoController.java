@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import cl.fullstack.pedido_ms.client.ProductoClient;
 import cl.fullstack.pedido_ms.dto.PedidoDTO;
-import cl.fullstack.pedido_ms.dto.ProductoDTO;
+import cl.fullstack.pedido_ms.dto.external.ProductoDTO;
 import cl.fullstack.pedido_ms.service.IPedidoService;
 
 import java.util.List;
