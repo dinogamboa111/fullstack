@@ -8,7 +8,6 @@ import cl.fullstack.pruducto_ms.dto.ProductoDTO;
 import cl.fullstack.pruducto_ms.service.IProductoService;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/productos")
 public class ProductoController {
@@ -48,5 +47,11 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.getAllProductos());
     }
 
+    // para cargar multiples productos y probar la bbdd
+    @PostMapping("/loteproductos")
+    public ResponseEntity<List<ProductoDTO>> crearProductosEnLote(@RequestBody List<ProductoDTO> productos) {
+        List<ProductoDTO> guardados = productoService.crearProductosEnLote(productos);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guardados);
+    }
 
 }

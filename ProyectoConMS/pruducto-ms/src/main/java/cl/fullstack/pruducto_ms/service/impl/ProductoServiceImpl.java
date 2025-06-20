@@ -136,4 +136,16 @@ public class ProductoServiceImpl implements IProductoService {
                 .collect(Collectors.toList());
     }
 
+    // metodo para cargar productos en lote a la bbdd
+    @Override
+    public List<ProductoDTO> crearProductosEnLote(List<ProductoDTO> productos) {
+        if (productos == null || productos.isEmpty()) {
+            throw new DatosInvalidosException("La lista de productos no puede estar vacía");
+        }
+
+        return productos.stream()
+                .map(this::createProducto) // usamos el metodo de crear productos individual
+                .collect(Collectors.toList());
+    }
+
 }

@@ -12,4 +12,6 @@ public interface IProductoService {
     ProductoDTO createProducto(ProductoDTO productoDTO);
     ProductoDTO actualizarProducto(int idProducto, ProductoDTO productoDTO);
     String eliminarProducto(int idProducto);
+    List<ProductoDTO> crearProductosEnLote(List<ProductoDTO> productos);
+
 }

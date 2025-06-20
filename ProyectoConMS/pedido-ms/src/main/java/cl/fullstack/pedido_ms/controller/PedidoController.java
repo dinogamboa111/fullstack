@@ -45,7 +45,6 @@ public class PedidoController {
         return ResponseEntity.noContent().build();
     }
 
-
     
     //METODO DE PRUEBA PARA COMPROBAR CONEXION CON PRODUCTO-MS TRAYENDO TODOS LOS PRODUCTOS DISPONIBLES EN ESE MS
     @Autowired
