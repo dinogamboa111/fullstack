@@ -15,5 +15,7 @@ public interface IDetallePedidoService {
 
     DetallePedidoDTO updateDetallePedido(DetallePedidoKey id, DetallePedidoDTO dto);
 
-    void deleteDetallePedido(DetallePedidoKey id);
+    String eliminarDetallePedido(DetallePedidoKey id);
+
+ 
 }
