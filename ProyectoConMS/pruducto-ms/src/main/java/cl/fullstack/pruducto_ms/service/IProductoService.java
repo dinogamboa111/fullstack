@@ -8,8 +8,8 @@ import cl.fullstack.pruducto_ms.dto.ProductoDTO;
 
 public interface IProductoService {
     List<ProductoDTO> getAllProductos();
-    ProductoDTO getProductoById(Long id);
+    ProductoDTO obtenerProducto(int idProducto);
     ProductoDTO createProducto(ProductoDTO productoDTO);
-    ProductoDTO updateProducto(Long id, ProductoDTO productoDTO);
-    void deleteProducto(Long id);
+    ProductoDTO actualizarProducto(int idProducto, ProductoDTO productoDTO);
+    String eliminarProducto(int idProducto);
 }

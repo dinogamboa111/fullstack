@@ -12,13 +12,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "provincia")
 public class ProvinciaEntity {
     @Id
-    @Column(name = "id_provincia")
+    @Column(name = "id_provincia", nullable=false)
     private int idProvincia;
     
-    @Column(nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
     @ManyToOne
     @JoinColumn(name = "id_region", nullable = false)
-    private RegionEntity region;
+    private RegionEntity idRegion;
 }

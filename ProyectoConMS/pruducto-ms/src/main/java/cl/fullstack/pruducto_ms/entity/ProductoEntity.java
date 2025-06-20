@@ -1,6 +1,5 @@
 package cl.fullstack.pruducto_ms.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,20 +11,17 @@ public class ProductoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_seq")
     @SequenceGenerator(name = "producto_seq", sequenceName = "PRODUCTO_SEQ", allocationSize = 1)
-    private Long id;
+    @Column(name = "id_producto")
+    private int idProducto;
 
-    private String nombre;
-    private String descripcion;
-    private int stock;
-    private double precioCompra;
-    private double precioVenta;
-    private boolean estado;
+    @Column(name = "nombre_producto", nullable = false)
+    private String nombreProducto;
+
+    @Column(name = "id_cliente", nullable = false)
+    private int idCliente;
 
     @ManyToOne
-    @JoinColumn(name = "id_categoria")
+    @JoinColumn(name = "id_categoria", nullable = false)
     private CategoriaEntity categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "id_proveedor")
-    private ProveedorEntity proveedor;
 }

@@ -30,6 +30,7 @@ public class ComunaServiceImpl implements IComunaService {
     private ModelMapper modelMapper;
 
     @Override
+
 @Transactional
 public ComunaDTO crearComuna(ComunaDTO comunaDTO) {
     if (comunaDTO.getNombre() == null || comunaDTO.getNombre().trim().isEmpty()) {
@@ -38,6 +39,22 @@ public ComunaDTO crearComuna(ComunaDTO comunaDTO) {
 
     if (comunaDTO.getIdComuna() != 0 && comunaRepository.existsById(comunaDTO.getIdComuna())) {
         throw new RecursoDuplicadoException("La comuna con ID " + comunaDTO.getIdComuna() + " ya existe");
+=======
+    @Transactional
+    public ComunaDTO crearComuna(ComunaDTO comunaDTO) {
+        if (comunaDTO.getNombre() == null || comunaDTO.getNombre().trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre de la comuna no puede estar vacio");
+        }
+        
+        // Validar que la provincia exista
+        ProvinciaEntity provinciaEntity = provinciaRepository.findById(comunaDTO.getIdProvincia().getIdProvincia())
+                .orElseThrow(() -> new RecursoNoEncontradoException("La provincia asociada no existe"));
+
+        ComunaEntity entity = modelMapper.map(comunaDTO, ComunaEntity.class);
+        entity.setIdProvincia(provinciaEntity); // Asignar la entidad de provincia
+        ComunaEntity savedEntity = comunaRepository.save(entity);
+        return modelMapper.map(savedEntity, ComunaDTO.class);
+
     }
 
     int idProvincia = comunaDTO.getProvincia().getIdProvincia();
@@ -88,7 +105,7 @@ public ComunaDTO crearComuna(ComunaDTO comunaDTO) {
 
     @Override
     public List<ComunaDTO> obtenerComunasPorProvincia(int idProvincia) {
-        return comunaRepository.findByProvinciaIdProvincia(idProvincia).stream()
+        return comunaRepository.findByIdProvincia_IdProvincia(idProvincia).stream()
                 .map(entity -> modelMapper.map(entity, ComunaDTO.class))
                 .collect(Collectors.toList());
     }

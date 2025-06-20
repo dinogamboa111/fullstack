@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProvinciaRepository extends JpaRepository<ProvinciaEntity, Integer> {
+
     List<ProvinciaEntity> findByRegionIdRegion(int idRegion); // Busca por ID de region
 
     // Evita duplicados por nombre (case-insensitive) dentro de una misma region
     Optional<ProvinciaEntity> findByNombreIgnoreCaseAndRegionIdRegion(String nombre, int idRegion);
+=======
+    List<ProvinciaEntity> findByIdRegion_IdRegion(int idRegion); // Busca por ID de region
+
 }

@@ -36,6 +36,7 @@ public class ProvinciaServiceImpl implements IProvinciaService {
             throw new IllegalArgumentException("El nombre de la provincia no puede estar vacio");
         }
 
+
         if (provinciaDTO.getIdProvincia() != 0 && provinciaRepository.existsById(provinciaDTO.getIdProvincia())) {
             throw new RecursoDuplicadoException("La provincia con ID " + provinciaDTO.getIdProvincia() + " ya existe");
         }
@@ -53,6 +54,15 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 
         ProvinciaEntity entity = modelMapper.map(provinciaDTO, ProvinciaEntity.class);
         entity.setRegion(regionEntity);
+=======
+        
+        // Validar que la region exista
+        RegionEntity regionEntity = regionRepository.findById(provinciaDTO.getIdRegion().getIdRegion())
+                .orElseThrow(() -> new RecursoNoEncontradoException("La region asociada no existe"));
+
+        ProvinciaEntity entity = modelMapper.map(provinciaDTO, ProvinciaEntity.class);
+        entity.setIdRegion(regionEntity); // Asignar la entidad de region
+
         ProvinciaEntity savedEntity = provinciaRepository.save(entity);
 
         return modelMapper.map(savedEntity, ProvinciaDTO.class);
@@ -89,7 +99,7 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 
     @Override
     public List<ProvinciaDTO> obtenerProvinciasPorRegion(int idRegion) {
-        return provinciaRepository.findByRegionIdRegion(idRegion).stream()
+        return provinciaRepository.findByIdRegion_IdRegion(idRegion).stream()
                 .map(entity -> modelMapper.map(entity, ProvinciaDTO.class))
                 .collect(Collectors.toList());
     }

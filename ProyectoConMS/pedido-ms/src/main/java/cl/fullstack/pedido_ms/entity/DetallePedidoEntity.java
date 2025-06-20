@@ -1,28 +1,31 @@
+
+
 package cl.fullstack.pedido_ms.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Data
 @Entity
 @Table(name = "detalle_pedido")
+@IdClass(DetallePedidoKey.class)
 public class DetallePedidoEntity {
 
-    @EmbeddedId
-    private DetallePedidoId id;
+    @Id
+    @Column(name = "PEDIDO_id_pedido")
+    private int pedidoId;
 
-    @Column(name = "id_detalle", nullable = false)
-    private int idDetalle;
+    @Id
+    @Column(name = "PRODUCTO_id_producto")
+    private int productoId;
 
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
-    @Column(name = "precio", nullable = false)
-    private int precio;
 
+ 
 }

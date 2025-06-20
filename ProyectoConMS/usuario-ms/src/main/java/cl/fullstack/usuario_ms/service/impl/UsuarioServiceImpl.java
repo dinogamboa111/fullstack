@@ -30,7 +30,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public UsuarioDTO getUsuarioById(Long id) {
+    public UsuarioDTO getUsuarioById(int id) {
         UsuarioEntity usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Usuario no encontrado con ID: " + id));
         return modelMapper.map(usuario, UsuarioDTO.class);
@@ -43,7 +43,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public UsuarioDTO updateUsuario(Long id, UsuarioDTO usuarioDTO) {
+    public UsuarioDTO updateUsuario(int id, UsuarioDTO usuarioDTO) {
         usuarioRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Usuario no encontrado con ID: " + id));
         usuarioDTO.setId(id); // aseguramos que no cambie el ID
@@ -52,7 +52,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public void deleteUsuario(Long id) {
+    public void deleteUsuario(int id) {
         UsuarioEntity usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Usuario no encontrado con ID: " + id));
         usuarioRepository.delete(usuario);

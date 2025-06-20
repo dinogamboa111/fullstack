@@ -8,8 +8,7 @@ public class DetallePedidoDTO {
 
     private int pedidoId;
     private int productoId;
-    private int idDetalle;
     private int cantidad;
-    private int precio;
+
 
 }

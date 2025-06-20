@@ -1,5 +1,6 @@
 package cl.fullstack.ubicacion_ms;
 
+
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
