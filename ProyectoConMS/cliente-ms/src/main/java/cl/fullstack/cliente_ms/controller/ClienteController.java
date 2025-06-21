@@ -29,7 +29,8 @@ public class ClienteController {
     private IClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<ClienteDTO> crear(/* @Valid */ @RequestBody ClienteDTO dto /* , BindingResult result */) {
+    public ResponseEntity<ClienteDTO> crear(/* @Valid */ @RequestBody ClienteDTO dto 
+                                                        /* , BindingResult result */) {
 
         /*
          * if (result.hasErrors()) { // si capta un error de validacion procede con el
@@ -45,7 +46,7 @@ public class ClienteController {
          * lleva el "metodo"
          * }
          */
-
+    System.out.println("HOLA 1");
         ClienteDTO creado = clienteService.crearCliente(dto); // si no hay errores desp de todo, llama al servicio
                                                               // "crearCliente" quien lo guarda en la bbdd, pueden ver
                                                               // el metodo que contiene validaciones propias en SERVICE

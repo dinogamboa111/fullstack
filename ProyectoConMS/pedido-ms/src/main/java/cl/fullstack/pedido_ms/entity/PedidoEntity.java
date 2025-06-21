@@ -47,16 +47,24 @@ public class PedidoEntity {
     @Column(name = "estado_pedido", nullable = false)
     private boolean estadoPedido;
 
-    // Relación con detalle pedido (uno a muchos), un pedido puede tener muchos detalles
-    //CascadeType.ALL*: con esto digo que cualquier operacion que se haga en pedidoEntity tb debe aaplicarse a todos los detallesPedidos asociados
-    //asi cuando se genera un pedido, no debo estar llaamando al metodo guardardetalle 
-    //orphanRemoval* = true, esto es que si se elimina un detallepedido de la lista, tb se debe eliminar de la bbdd
-    //* con esto, tal vez no es necesario un crud independiente para detallepedido, porque todo lo que contemple detallepedido se puede manejar desde pedido
+    // Relación con detalle pedido (uno a muchos), un pedido puede tener muchos
+    // detalles
+    // CascadeType.ALL*: con esto digo que cualquier operacion que se haga en
+    // pedidoEntity tb debe aaplicarse a todos los detallesPedidos asociados
+    // asi cuando se genera un pedido, no debo estar llaamando al metodo
+    // guardardetalle
+    // orphanRemoval* = true, esto es que si se elimina un detallepedido de la
+    // lista, tb se debe eliminar de la bbdd
+    // * con esto, tal vez no es necesario un crud independiente para detallepedido,
+    // porque todo lo que contemple detallepedido se puede manejar desde pedido
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "pedido_id_pedido") // debe coincidir EXACTAMENTE con la FK en detalle_pedido
     private List<DetallePedidoEntity> detallePedido;
 
-    @Column(name = "usuario_id", nullable = false)
-    private int usuarioId;
+    @Column(name = "id_despachador", nullable = true)
+    private Integer idDespachador;
+
+    @Column(name = "id_centro", nullable = true)
+    private Integer idCentro;
 
 }

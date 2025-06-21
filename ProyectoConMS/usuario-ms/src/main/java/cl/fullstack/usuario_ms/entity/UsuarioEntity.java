@@ -1,18 +1,11 @@
 package cl.fullstack.usuario_ms.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "usuario") // modifique nombre tabla usuario, estaba generandola de manera automatica como
-                         // USUARIO_ENTITY
+@Table(name = "usuario")
 public class UsuarioEntity {
 
     @Id
@@ -29,7 +22,14 @@ public class UsuarioEntity {
 
     @Column(name = "password", nullable = false)
     private String password;
-    
-    @Column(name = "rol", nullable = false)
-    private String rol;
+
+    @Column(name = "id_comuna", nullable = false)
+    private int idComuna;
+
+    @Column(name = "id_centro") // este se llenará automáticamente si el rol es Despachador
+    private Integer idCentro;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "rol_id")
+    private RolEntity rol;
 }

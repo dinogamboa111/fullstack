@@ -9,5 +9,7 @@ public class UsuarioDTO {
     private String nombre;
     private String email;
     private String password;
-    private String rol; // ADMIN o USER
+    private int idComuna;
+    private RolDTO rol; 
+    private Integer idCentro;
 }

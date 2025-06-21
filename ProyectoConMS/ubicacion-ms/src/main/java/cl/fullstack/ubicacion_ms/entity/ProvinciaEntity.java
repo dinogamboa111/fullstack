@@ -20,5 +20,5 @@ public class ProvinciaEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_region", nullable = false)
-    private RegionEntity idRegion;
+    private RegionEntity region;
 }

@@ -5,24 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 
-@Data // genera getters, setters y otros metodos automaticamente
-@NoArgsConstructor // genera constructor vacio
-@AllArgsConstructor // genera constructor con todos los campos
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "Comuna_cubierta") // tabla intermedia
-@IdClass(ComunaCubiertaPKcompuesta.class)  //llama a clase ComunaCubiertaPKcompuesta , para poder usar @id en mas columnas (clave compuesta)
-public class ComunaCubiertaEntity {
+@Table(name = "comuna_cubierta")
+@IdClass(ComunaCubiertaPKcompuesta.class)
+public class ComunaCubiertaEntity implements Serializable {
 
- 
     @Id
-    @Column(name = "id_centro") // id del centro de distribucion, no es PK
+    @Column(name = "id_centro", nullable = false)
     private int idCentro;
-    
+
     @Id
-    @Column(name = "id_comuna") // id de la comuna que cubre
+    @Column(name = "id_comuna", nullable = false)
     private int idComuna;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_centro", insertable = false, updatable = false)
+    private CentroDistribucionEntity centroDistribucion;
 }
-
-

@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class ProvinciaDTO {
     private int idProvincia;
     private String nombre;
-    private RegionDTO idRegion; // Relacion con RegionDTO
+    private RegionDTO region; // Relacion con RegionDTO
 }
