@@ -39,11 +39,12 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoService.updatePedido(idPedido, pedidoDTO));
     }
 
-    @DeleteMapping("/{idPedido}")
-    public ResponseEntity<Void> deletePedido(@PathVariable int idPedido) {
-        pedidoService.deletePedido(idPedido);
-        return ResponseEntity.noContent().build();
-    }
+  @DeleteMapping("/{idPedido}")
+public ResponseEntity<String> deletePedido(@PathVariable int idPedido) {
+    String mensaje = pedidoService.deletePedido(idPedido);
+    return ResponseEntity.ok(mensaje);
+}
+
 
     
     //METODO DE PRUEBA PARA COMPROBAR CONEXION CON PRODUCTO-MS TRAYENDO TODOS LOS PRODUCTOS DISPONIBLES EN ESE MS
