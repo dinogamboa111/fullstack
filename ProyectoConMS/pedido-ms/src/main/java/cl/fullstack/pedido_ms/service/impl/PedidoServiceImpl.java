@@ -2,6 +2,7 @@ package cl.fullstack.pedido_ms.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,13 +19,21 @@ import cl.fullstack.pedido_ms.dto.DetallePedidoDTO;
 import cl.fullstack.pedido_ms.dto.PedidoDTO;
 import cl.fullstack.pedido_ms.dto.external.CentroDistribucionDTO;
 import cl.fullstack.pedido_ms.dto.external.ClienteDTO;
+import cl.fullstack.pedido_ms.dto.external.ComunaDTO;
+import cl.fullstack.pedido_ms.dto.external.ProductoDTO;
 import cl.fullstack.pedido_ms.dto.external.UsuarioDTO;
 import cl.fullstack.pedido_ms.entity.DetallePedidoEntity;
 import cl.fullstack.pedido_ms.entity.PedidoEntity;
+import cl.fullstack.pedido_ms.exception.DatosInvalidosException;
 import cl.fullstack.pedido_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.pedido_ms.repository.DetallePedidoRepository;
 import cl.fullstack.pedido_ms.repository.PedidoRepository;
 import cl.fullstack.pedido_ms.service.IPedidoService;
+
+//aki
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+
 
 @Service
 public class PedidoServiceImpl implements IPedidoService {
@@ -52,33 +61,108 @@ public class PedidoServiceImpl implements IPedidoService {
 
     @Autowired
     private CentroDistribucionClient centroDistribucionClient;
+    
 
-    public PedidoDTO createPedido(PedidoDTO pedidoDTO) {
-        // 1. Obtener centro según comuna
-        CentroDistribucionDTO centro = centroDistribucionClient.obtenerCentroPorComuna(pedidoDTO.getIdComuna());
-        if (centro == null) {
-            throw new RuntimeException("No se encontró centro para la comuna " + pedidoDTO.getIdComuna());
-        }
-
-        // 2. Obtener despachadores del centro
-        List<UsuarioDTO> despachadores = usuarioClient.obtenerDespachadoresPorCentro(centro.getIdCentro());
-        if (despachadores == null || despachadores.isEmpty()) {
-            throw new RuntimeException("No se encontró despachador para el centro: " + centro.getIdCentro());
-        }
-
-        // 3. Seleccionar el despachador (por ejemplo, el primero)
-        UsuarioDTO despachador = despachadores.get(0);
-
-        // 4. Asignar el id del despachador al pedido
-        pedidoDTO.setIdDespachador(despachador.getId());
-
-        // 5. Mapeo DTO a Entity, guardar en DB, etc.
-        PedidoEntity pedidoEntity = modelMapper.map(pedidoDTO, PedidoEntity.class);
-        pedidoEntity = pedidoRepository.save(pedidoEntity);
-
-        // 6. Mapear de vuelta y retornar
-        return modelMapper.map(pedidoEntity, PedidoDTO.class);
+    //metodo para crear pedido
+    
+    @Override
+public PedidoDTO createPedido(PedidoDTO pedidoDTO) {
+    // 1. Validaciones básicas de datos
+    if (pedidoDTO.getRutCliente() <= 0) {
+        throw new DatosInvalidosException("El RUT del cliente debe ser mayor que cero.");
     }
+
+    if (pedidoDTO.getDvCliente() == '\0' || Character.isWhitespace(pedidoDTO.getDvCliente())) {
+        throw new DatosInvalidosException("El dígito verificador del cliente es obligatorio.");
+    }
+
+    if (pedidoDTO.getNumCalle() == null || pedidoDTO.getNumCalle().isBlank()) {
+        throw new DatosInvalidosException("El número de calle es obligatorio.");
+    }
+
+    if (pedidoDTO.getNombreCalle() == null || pedidoDTO.getNombreCalle().isBlank()) {
+        throw new DatosInvalidosException("El nombre de calle es obligatorio.");
+    }
+
+    if (pedidoDTO.getIdComuna() <= 0) {
+        throw new DatosInvalidosException("La comuna es inválida.");
+    }
+
+    // 2. Validar existencia del cliente
+    ClienteDTO cliente = clienteClient.obtenerClienteByRut(pedidoDTO.getRutCliente());
+    if (cliente == null) {
+        throw new RecursoNoEncontradoException("No se encontró el cliente con RUT: " + pedidoDTO.getRutCliente());
+    }
+
+    // 3. Validar existencia de la comuna
+    ComunaDTO comuna = ubicacionClient.obtenerComunasById(pedidoDTO.getIdComuna());
+    if (comuna == null) {
+        throw new RecursoNoEncontradoException("No se encontró la comuna con ID: " + pedidoDTO.getIdComuna());
+    }
+
+    // 4. Validar productos del detalle si existen
+    if (pedidoDTO.getDetallePedido() != null) {
+        for (DetallePedidoDTO detalle : pedidoDTO.getDetallePedido()) {
+            if (detalle.getProductoId() <= 0) {
+                throw new DatosInvalidosException("Producto inválido en el detalle.");
+            }
+            if (detalle.getCantidad() <= 0) {
+                throw new DatosInvalidosException("La cantidad debe ser mayor que cero para el producto ID: " + detalle.getProductoId());
+            }
+
+            // Validar que el producto exista
+            ProductoDTO producto = productoClient.obtenerProductoPorId(detalle.getProductoId());
+            if (producto == null) {
+                throw new RecursoNoEncontradoException("No se encontró el producto con ID: " + detalle.getProductoId());
+            }
+        }
+    }
+
+    // 5. Obtener centro de distribución por comuna
+    CentroDistribucionDTO centro = centroDistribucionClient.obtenerCentroPorComuna(pedidoDTO.getIdComuna());
+    if (centro == null) {
+        throw new RecursoNoEncontradoException("No se encontró centro para la comuna ID: " + pedidoDTO.getIdComuna());
+    }
+
+    // 6. Obtener despachadores por centro
+    List<UsuarioDTO> despachadores = usuarioClient.obtenerDespachadoresPorCentro(centro.getIdCentro());
+    if (despachadores == null || despachadores.isEmpty()) {
+        throw new RecursoNoEncontradoException("No se encontró despachador para el centro ID: " + centro.getIdCentro());
+    }
+
+    // 7. Seleccionar primer despachador
+    UsuarioDTO despachador = despachadores.get(0);
+    pedidoDTO.setIdDespachador(despachador.getId());
+
+    // 8. Mapear PedidoDTO a PedidoEntity (sin detalles aún)
+    PedidoEntity pedidoEntity = modelMapper.map(pedidoDTO, PedidoEntity.class);
+    pedidoEntity.setIdCentro(centro.getIdCentro());
+    pedidoEntity.setDetallePedido(null); // importante: evitar que Hibernate intente persistir antes
+
+    // 9. Guardar PedidoEntity para obtener ID
+    pedidoEntity = pedidoRepository.save(pedidoEntity);
+
+    // 10. Mapear y asociar los detalles (si existen)
+    if (pedidoDTO.getDetallePedido() != null && !pedidoDTO.getDetallePedido().isEmpty()) {
+        Type listType = new TypeToken<List<DetallePedidoEntity>>() {}.getType();
+        List<DetallePedidoEntity> detalles = modelMapper.map(pedidoDTO.getDetallePedido(), listType);
+
+        for (DetallePedidoEntity detalle : detalles) {
+            detalle.setPedidoId(pedidoEntity.getIdPedido());     // clave foránea
+            detalle.setPedido(pedidoEntity);                     // relación bidireccional (si aplica)
+        }
+
+        // 11. Asignar detalles y guardar de nuevo (cascade)
+        pedidoEntity.setDetallePedido(detalles);
+        pedidoEntity = pedidoRepository.save(pedidoEntity);
+    }
+
+    // 12. Mapear PedidoEntity de vuelta a PedidoDTO
+    PedidoDTO respuesta = modelMapper.map(pedidoEntity, PedidoDTO.class);
+    return respuesta;
+}
+
+
 
     @Override
     public List<PedidoDTO> getAllPedidos() {
