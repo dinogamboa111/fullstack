@@ -7,11 +7,9 @@ import java.util.Optional;
 
 public interface ComunaRepository extends JpaRepository<ComunaEntity, Integer> {
 
-    List<ComunaEntity> findByProvinciaIdProvincia(int idProvincia); // Busca por ID de provincia
+    List<ComunaEntity> findByProvinciaIdProvincia(int idProvincia);
 
-    // Para validar duplicados ignorando mayusculas dentro de una provincia
-    Optional<ComunaEntity> findByNombreIgnoreCaseAndProvinciaIdProvincia(String nombre, int idProvincia);
-=======
-    List<ComunaEntity> findByIdProvincia_IdProvincia(int idProvincia); // Busca por ID de provincia
+    Optional<ComunaEntity> findByNombreIgnoreCaseAndProvincia_IdProvincia(String nombre, int idProvincia);
 
+    List<ComunaEntity> findByProvincia_IdProvincia(int idProvincia);
 }

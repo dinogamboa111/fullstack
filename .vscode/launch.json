@@ -2,6 +2,41 @@
   "configurations": [
     {
       "type": "java",
+      "name": "PruductoMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.pruducto_ms.PruductoMsApplication",
+      "projectName": "cl.fullstack-pruducto-ms"
+    },
+    {
+      "type": "java",
+      "name": "ClienteMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.cliente_ms.ClienteMsApplication",
+      "projectName": "cl.fullstack-cliente-ms"
+    },
+    {
+      "type": "java",
+      "name": "PedidoMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.pedido_ms.PedidoMsApplication",
+      "projectName": "cl.fullstack-pedido-ms"
+    },
+    {
+      "type": "java",
+      "name": "CentroDistribucionMsApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.centro_distribucion_ms.CentroDistribucionMsApplication",
+      "projectName": "centro-distribucion-ms"
+    },
+    {
+      "type": "java",
+      "name": "EurekaserverApplication",
+      "request": "launch",
+      "mainClass": "cl.fullstack.eurekaserver.EurekaserverApplication",
+      "projectName": "cl.fullstack-eurekaserver"
+    },
+    {
+      "type": "java",
       "name": "UbicacionMsApplication",
       "request": "launch",
       "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication"
@@ -51,6 +86,16 @@
       "cwd": "${workspaceFolder}",
       "mainClass": "cl.fullstack.ubicacion_ms.UbicacionMsApplication",
       "projectName": "ubicacion-ms",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-UsuarioMsApplication<cl.fullstack-usuario-ms>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "cl.fullstack.usuario_ms.UsuarioMsApplication",
+      "projectName": "cl.fullstack-usuario-ms",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
     }

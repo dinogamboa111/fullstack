@@ -1,5 +1,11 @@
 package cl.fullstack.pedido_ms.dto.external;
 
-public class UsuarioDTO {
+import lombok.Data;
 
+@Data
+public class UsuarioDTO {
+    private int id;
+    private String nombre;
+    private String email;
+    // etc.
 }

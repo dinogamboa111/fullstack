@@ -70,7 +70,7 @@ public class ProvinciaServiceImpl implements IProvinciaService {
 
     @Override
     public List<ProvinciaDTO> obtenerProvinciasPorRegion(int idRegion) {
-        return provinciaRepository.findByIdRegion_IdRegion(idRegion).stream()
+        return provinciaRepository.findByRegion_IdRegion(idRegion).stream()
                 .map(entity -> modelMapper.map(entity, ProvinciaDTO.class))
                 .collect(Collectors.toList());
     }

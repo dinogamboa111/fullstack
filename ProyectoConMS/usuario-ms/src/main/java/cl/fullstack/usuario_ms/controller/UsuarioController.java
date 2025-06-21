@@ -1,6 +1,7 @@
 package cl.fullstack.usuario_ms.controller;
 
 import cl.fullstack.usuario_ms.dto.UsuarioDTO;
+
 import cl.fullstack.usuario_ms.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,5 +41,18 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteUsuario(@PathVariable int id) {
         usuarioService.deleteUsuario(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/despachador/comuna/{idComuna}")
+    public ResponseEntity<UsuarioDTO> findDespachadorByComuna(@PathVariable int idComuna) {
+        return usuarioService.findDespachadorByComuna(idComuna)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/despachador/centro/{idCentro}")
+    public ResponseEntity<UsuarioDTO> obtenerDespachadorPorCentro(@PathVariable int idCentro) {
+        UsuarioDTO despachador = usuarioService.buscarDespachadorPorCentro(idCentro);
+        return ResponseEntity.ok(despachador);
     }
 }

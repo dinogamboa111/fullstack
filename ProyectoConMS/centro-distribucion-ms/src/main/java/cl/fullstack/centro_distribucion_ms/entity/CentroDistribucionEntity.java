@@ -33,9 +33,10 @@ public class CentroDistribucionEntity {
     private String nombreProvincia;
 
     @Column(name = "nombre_region", nullable = false)
+
     private String nombreRegion;
 
-    @OneToMany(mappedBy = "centroDistribucion", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_centro", referencedColumnName = "id_centro")
     private List<ComunaCubiertaEntity> comunasCubiertas;
 }
-
