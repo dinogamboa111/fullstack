@@ -61,7 +61,10 @@ public class PedidoEntity {
     @JoinColumn(name = "pedido_id_pedido") // debe coincidir EXACTAMENTE con la FK en detalle_pedido
     private List<DetallePedidoEntity> detallePedido;
 
-    @Column(name = "id_despachador", nullable = false)
+    @Column(name = "id_despachador", nullable = true)
     private Integer idDespachador;
+
+    @Column(name = "id_centro", nullable = true)
+    private Integer idCentro;
 
 }

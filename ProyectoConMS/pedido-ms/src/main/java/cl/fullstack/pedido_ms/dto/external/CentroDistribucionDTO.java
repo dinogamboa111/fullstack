@@ -12,3 +12,4 @@ public class CentroDistribucionDTO {
     private String nombreProvincia;
     private String nombreRegion;
 }
+

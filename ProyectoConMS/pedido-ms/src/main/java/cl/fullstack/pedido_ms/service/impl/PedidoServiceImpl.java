@@ -73,11 +73,11 @@ public class PedidoServiceImpl implements IPedidoService {
         pedidoDTO.setIdDespachador(despachador.getId());
 
         // 5. Mapeo DTO a Entity, guardar en DB, etc.
-        PedidoEntity pedidoEntity = mapper.map(pedidoDTO, PedidoEntity.class);
+        PedidoEntity pedidoEntity = modelMapper.map(pedidoDTO, PedidoEntity.class);
         pedidoEntity = pedidoRepository.save(pedidoEntity);
 
         // 6. Mapear de vuelta y retornar
-        return mapper.map(pedidoEntity, PedidoDTO.class);
+        return modelMapper.map(pedidoEntity, PedidoDTO.class);
     }
 
     @Override
@@ -85,6 +85,13 @@ public class PedidoServiceImpl implements IPedidoService {
         return pedidoRepository.findAll().stream()
                 .map(pedido -> modelMapper.map(pedido, PedidoDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public PedidoDTO getPedidoById(int id) {
+        PedidoEntity entity = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado con id: " + id));
+        return modelMapper.map(entity, PedidoDTO.class);
     }
 
     @Override

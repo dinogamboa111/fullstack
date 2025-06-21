@@ -7,7 +7,7 @@ server:
  
 spring:
   application:
-    name: centro-distribucion-service
+    name: centro-distribucion-ms
 
   datasource:
     url: jdbc:oracle:thin:@207.231.108.32:49161/xe
