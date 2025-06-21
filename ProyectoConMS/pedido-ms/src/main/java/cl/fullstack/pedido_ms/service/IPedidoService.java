@@ -14,6 +14,6 @@ public interface IPedidoService {
 
     PedidoDTO updatePedido(int idPEdido, PedidoDTO pedidoDTO);
 
-    void deletePedido(int idPedido);
+    String deletePedido(int idPedido);
 
 }

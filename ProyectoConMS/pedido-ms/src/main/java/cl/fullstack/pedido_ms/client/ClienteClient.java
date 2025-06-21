@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import cl.fullstack.pedido_ms.dto.external.ClienteDTO;
@@ -22,7 +23,11 @@ public class ClienteClient {
     
     //aqui hacemos una llamada get a la url 
     public ClienteDTO obtenerClienteByRut(int rutCliente) {
-        return restTemplate.getForObject("http://cliente-service/api/clientes/" + rutCliente,  ClienteDTO.class);
+        try {
+            return restTemplate.getForObject("http://cliente-service/api/clientes/" + rutCliente, ClienteDTO.class);
+        } catch (HttpClientErrorException.NotFound e) {
+            return null; // Cliente no encontrado
+        }
     }
     //tambien hace una llamada get a la url, pero obtenienndo todos en una lista, se usa .exchange porque getForObjet no doporta tipos genericos como List<ProductoDTO>
     public List< ClienteDTO> obtenerTodosLosCLientes() {
