@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Service
@@ -49,22 +49,18 @@ public class UsuarioServiceImpl implements IUsuarioService {
         return modelMapper.map(usuarioConRol, UsuarioDTO.class);
     }
 
-    @Override
-    public Optional<UsuarioDTO> findDespachadorByComuna(int idComuna) {
-        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findDespachadorByRolIdAndComuna(null, idComuna);
-        return usuarioOpt.map(usuario -> modelMapper.map(usuario, UsuarioDTO.class));
+    public UsuarioDTO findPrimerUsuarioPorCentro(Integer idCentro) {
+        UsuarioEntity entity = usuarioRepository.findFirstByIdCentro(idCentro);
+        return modelMapper.map(entity, UsuarioDTO.class);
     }
 
     @Override
-    public UsuarioDTO buscarDespachadorPorCentro(int idCentro) {
-        // Rol 1 = Despachador (ajusta si usas otro ID)
-        Optional<UsuarioEntity> usuarioOpt = usuarioRepository.findFirstByIdCentroAndRolId(idCentro, 1);
+    public List<UsuarioDTO> buscarDespachadoresPorCentro(int idCentro) {
+        List<UsuarioEntity> usuarios = usuarioRepository.findByIdCentroAndRolId(idCentro, 1); // 1 = rol despachador
 
-        if (usuarioOpt.isEmpty()) {
-            throw new RecursoNoEncontradoException("No se encontró despachador para el centro " + idCentro);
-        }
-
-        return modelMapper.map(usuarioOpt.get(), UsuarioDTO.class);
+        return usuarios.stream()
+                .map(usuario -> modelMapper.map(usuario, UsuarioDTO.class))
+                .collect(Collectors.toList());
     }
 
     // @Override

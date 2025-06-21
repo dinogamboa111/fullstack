@@ -18,12 +18,9 @@ import cl.fullstack.pedido_ms.dto.DetallePedidoDTO;
 import cl.fullstack.pedido_ms.dto.PedidoDTO;
 import cl.fullstack.pedido_ms.dto.external.CentroDistribucionDTO;
 import cl.fullstack.pedido_ms.dto.external.ClienteDTO;
-import cl.fullstack.pedido_ms.dto.external.ComunaDTO;
-import cl.fullstack.pedido_ms.dto.external.ProductoDTO;
 import cl.fullstack.pedido_ms.dto.external.UsuarioDTO;
 import cl.fullstack.pedido_ms.entity.DetallePedidoEntity;
 import cl.fullstack.pedido_ms.entity.PedidoEntity;
-import cl.fullstack.pedido_ms.exception.DatosInvalidosException;
 import cl.fullstack.pedido_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.pedido_ms.repository.DetallePedidoRepository;
 import cl.fullstack.pedido_ms.repository.PedidoRepository;
@@ -56,78 +53,31 @@ public class PedidoServiceImpl implements IPedidoService {
     @Autowired
     private CentroDistribucionClient centroDistribucionClient;
 
-    @Override
-    public PedidoDTO createPedido(PedidoDTO dto) {
-        if (dto == null) {
-            throw new DatosInvalidosException("Los datos del pedido no pueden ser nulos");
+    public PedidoDTO createPedido(PedidoDTO pedidoDTO) {
+        // 1. Obtener centro según comuna
+        CentroDistribucionDTO centro = centroDistribucionClient.obtenerCentroPorComuna(pedidoDTO.getIdComuna());
+        if (centro == null) {
+            throw new RuntimeException("No se encontró centro para la comuna " + pedidoDTO.getIdComuna());
         }
 
-        if (dto.getRutCliente() <= 0) {
-            throw new DatosInvalidosException("Debe proporcionar un ID de cliente válido");
+        // 2. Obtener despachadores del centro
+        List<UsuarioDTO> despachadores = usuarioClient.obtenerDespachadoresPorCentro(centro.getIdCentro());
+        if (despachadores == null || despachadores.isEmpty()) {
+            throw new RuntimeException("No se encontró despachador para el centro: " + centro.getIdCentro());
         }
 
-        ClienteDTO cliente = clienteClient.obtenerClienteByRut(dto.getRutCliente());
-        if (cliente == null) {
-            throw new RecursoNoEncontradoException("Cliente con ID " + dto.getRutCliente() + " no existe");
-        }
+        // 3. Seleccionar el despachador (por ejemplo, el primero)
+        UsuarioDTO despachador = despachadores.get(0);
 
-        if (dto.getIdComuna() <= 0) {
-            throw new DatosInvalidosException("Debe proporcionar un ID de comuna válido.");
-        }
+        // 4. Asignar el id del despachador al pedido
+        pedidoDTO.setIdDespachador(despachador.getId());
 
-        ComunaDTO comuna = ubicacionClient.obtenerComunasById(dto.getIdComuna());
-        if (comuna == null) {
-            throw new RecursoNoEncontradoException("Comuna con ID " + dto.getIdComuna() + " no existe");
-        }
+        // 5. Mapeo DTO a Entity, guardar en DB, etc.
+        PedidoEntity pedidoEntity = mapper.map(pedidoDTO, PedidoEntity.class);
+        pedidoEntity = pedidoRepository.save(pedidoEntity);
 
-        for (DetallePedidoDTO detalleDTO : dto.getDetallePedido()) {
-            ProductoDTO producto = productoClient.obtenerProductoPorId(detalleDTO.getProductoId());
-            if (producto == null) {
-                throw new RecursoNoEncontradoException("Producto con ID " + detalleDTO.getProductoId() + " no existe.");
-            }
-        }
-
-        Optional<CentroDistribucionDTO> centroOpt = centroDistribucionClient.obtenerCentroPorComuna(dto.getIdComuna());
-
-        if (centroOpt.isEmpty() || centroOpt.get().getIdCentro() == null) {
-            throw new RecursoNoEncontradoException(
-                    "No se encontró centro de distribución para la comuna ID " + dto.getIdComuna());
-        }
-
-        dto.setIdCentro(centroOpt.get().getIdCentro());
-
-        // Obtener despachador asignado al centro de distribución
-        UsuarioDTO despachador = usuarioClient.obtenerDespachadorPorCentro(dto.getIdCentro());
-        if (despachador == null) {
-            throw new RecursoNoEncontradoException(
-                    "No se encontró un despachador asignado al centro de distribución ID " + dto.getIdCentro());
-        }
-        dto.setIdDespachador(despachador.getId());
-
-        PedidoEntity pedido = modelMapper.map(dto, PedidoEntity.class);
-
-        pedido.setDetallePedido(null);
-        PedidoEntity pedidoGuardado = pedidoRepository.save(pedido);
-
-        List<DetallePedidoEntity> detalles = dto.getDetallePedido().stream().map(detalleDTO -> {
-            DetallePedidoEntity detalle = new DetallePedidoEntity();
-            detalle.setPedidoId(pedidoGuardado.getIdPedido());
-            detalle.setProductoId(detalleDTO.getProductoId());
-            detalle.setCantidad(detalleDTO.getCantidad());
-            return detalle;
-        }).collect(Collectors.toList());
-
-        detallePedidoRepository.saveAll(detalles);
-        pedidoGuardado.setDetallePedido(detalles);
-
-        return modelMapper.map(pedidoGuardado, PedidoDTO.class);
-    }
-
-    @Override
-    public PedidoDTO getPedidoById(int id) {
-        PedidoEntity pedido = pedidoRepository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException("pedido no encontrado con ID: " + id));
-        return modelMapper.map(pedido, PedidoDTO.class);
+        // 6. Mapear de vuelta y retornar
+        return mapper.map(pedidoEntity, PedidoDTO.class);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class UsuarioClient {
 
     // aqui hacemos una llamada get a la url
     public UsuarioDTO obtenerUsuariosById(int usuarioId) {
-        return restTemplate.getForObject("http://USUARIO-SERVICE/api/usuarios/" + usuarioId, UsuarioDTO.class);
+        return restTemplate.getForObject("http://usuario-service/api/usuarios/" + usuarioId, UsuarioDTO.class);
     }
 
     // tambien hace una llamada get a la url, pero obtenienndo todos en una lista,
@@ -31,7 +31,7 @@ public class UsuarioClient {
     // List<UsuarioDTO>
     public List<UsuarioDTO> obtenerTodosLosUsuarios() {
         ResponseEntity<List<UsuarioDTO>> response = restTemplate.exchange(
-                "http://USUARIO-SERVICE/api/usuarios/",
+                "http://usuario-service/api/usuarios/",
                 HttpMethod.GET,
                 null,
                 // este new le dice a spring que espere una lista de UusuarioDTO
@@ -41,17 +41,26 @@ public class UsuarioClient {
 
     }
 
-    public UsuarioDTO obtenerDespachadorPorComuna(int idComuna) {
-        return restTemplate.getForObject("http://usuario-service/api/usuarios/despachador/comuna/" + idComuna,
+    public UsuarioDTO obtenerPrimerUsuarioPorCentro(Integer idCentro) {
+        return restTemplate.getForObject("http://usuario-service/api/usuarios/usuario/centro/" + idCentro,
                 UsuarioDTO.class);
     }
 
-   
-
-    // Aquí agregas el método nuevo
-    public UsuarioDTO obtenerDespachadorPorCentro(Integer idCentro) {
-        return restTemplate.getForObject("http://usuario-service/api/usuarios/despachador/centro/" + idCentro,
-                UsuarioDTO.class);
+    // // Aquí agregas el método nuevo
+    // public UsuarioDTO obtenerDespachadorPorCentro(Integer idCentro) {
+    // return
+    // restTemplate.getForObject("http://usuario-service/api/usuarios/despachador/centro/"
+    // + idCentro,
+    // UsuarioDTO.class);
+    // }
+    public List<UsuarioDTO> obtenerDespachadoresPorCentro(Integer idCentro) {
+        ResponseEntity<List<UsuarioDTO>> response = restTemplate.exchange(
+                "http://usuario-service/api/usuarios/despachador/centro/" + idCentro,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<UsuarioDTO>>() {
+                });
+        return response.getBody();
     }
 
 }

@@ -62,6 +62,6 @@ public class PedidoEntity {
     private List<DetallePedidoEntity> detallePedido;
 
     @Column(name = "id_despachador", nullable = false)
-    private int idDespachador;
+    private Integer idDespachador;
 
 }

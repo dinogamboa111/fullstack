@@ -43,16 +43,19 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/despachador/comuna/{idComuna}")
-    public ResponseEntity<UsuarioDTO> findDespachadorByComuna(@PathVariable int idComuna) {
-        return usuarioService.findDespachadorByComuna(idComuna)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/usuario/centro/{idCentro}")
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorCentro(@PathVariable Integer idCentro) {
+        UsuarioDTO usuario = usuarioService.findPrimerUsuarioPorCentro(idCentro);
+        return ResponseEntity.ok(usuario);
     }
 
     @GetMapping("/despachador/centro/{idCentro}")
-    public ResponseEntity<UsuarioDTO> obtenerDespachadorPorCentro(@PathVariable int idCentro) {
-        UsuarioDTO despachador = usuarioService.buscarDespachadorPorCentro(idCentro);
-        return ResponseEntity.ok(despachador);
+    public ResponseEntity<List<UsuarioDTO>> obtenerDespachadoresPorCentro(@PathVariable int idCentro) {
+        List<UsuarioDTO> despachadores = usuarioService.buscarDespachadoresPorCentro(idCentro);
+
+        if (despachadores.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(despachadores);
     }
 }

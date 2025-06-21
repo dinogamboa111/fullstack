@@ -35,4 +35,6 @@ public class ClienteClient {
         );
         return response.getBody();
     }
+
+    
 }

@@ -1,5 +1,4 @@
 
-
 package cl.fullstack.pedido_ms.entity;
 
 import jakarta.persistence.*;
@@ -26,6 +25,8 @@ public class DetallePedidoEntity {
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
-
- 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("pedidoId") // Indica que esta relación usa la parte pedidoId de la clave compuesta
+    @JoinColumn(name = "PEDIDO_id_pedido")
+    private PedidoEntity pedido;
 }

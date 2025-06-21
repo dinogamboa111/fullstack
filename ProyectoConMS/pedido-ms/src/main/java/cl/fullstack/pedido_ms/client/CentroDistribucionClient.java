@@ -1,8 +1,7 @@
 package cl.fullstack.pedido_ms.client;
 
-import java.util.Optional;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException;
+
 import org.springframework.web.client.RestTemplate;
 
 import cl.fullstack.pedido_ms.dto.external.CentroDistribucionDTO;
@@ -16,18 +15,15 @@ public class CentroDistribucionClient {
         this.restTemplate = restTemplate;
     }
 
-    public Optional<CentroDistribucionDTO> obtenerCentroPorComuna(int idComuna) {
-        try {
-            CentroDistribucionDTO centro = restTemplate.getForObject(
-                "http://CENTRO-DISTRIBUCION-MS/api/centros-distribucion/comuna/" + idComuna,
+    // private static final String CENTRO_SERVICE = "http://centro-distribucion-ms";
+
+    public CentroDistribucionDTO obtenerCentroPorComuna(int idComuna) {
+        CentroDistribucionDTO centro = restTemplate.getForObject(
+                "http://centro-distribucion-ms/api/centros-distribucion/comuna/" + idComuna,
                 CentroDistribucionDTO.class);
-            return Optional.ofNullable(centro);
-        } catch (HttpClientErrorException.NotFound e) {
-            // No se encontró el centro para la comuna
-            return Optional.empty();
-        } catch (Exception e) {
-            // Aquí podrías manejar otras excepciones o re-lanzar
-            throw e;
+        if (centro == null) {
+            throw new RuntimeException("No se encontró centro para la comuna: " + idComuna);
         }
+        return centro;
     }
 }
