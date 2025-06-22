@@ -61,5 +61,5 @@ public class GuiaDespachoEntity {
 private List<DetalleGuiaEntity> detalles = new ArrayList<>();
 
 
-    // Otros campos, getters y setters (Lombok @Data ya los genera)
+    
 }

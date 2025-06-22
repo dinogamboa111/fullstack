@@ -131,7 +131,7 @@ public UsuarioDTO obtenerUsuarioPorId(int id) {
 
     UsuarioEntity usuarioEntity = usuarioEntityOpt.get();
 
-    // Mapear entidad a DTO usando ModelMapper
+    
     UsuarioDTO usuarioDTO = modelMapper.map(usuarioEntity, UsuarioDTO.class);
 
     return usuarioDTO;

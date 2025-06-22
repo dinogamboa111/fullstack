@@ -124,7 +124,7 @@ public GuiaDespachoResponseDTO crearGuiaDespacho(int idDespachador) {
     GuiaDespachoResponseDTO response = new GuiaDespachoResponseDTO();
     response.setIdGuia(guiaGuardada.getIdGuia());
     response.setIdDespachador(idDespachador);
-    response.setPedidosAsociados(pedidos);  // <-- aquí pasas toda la lista completa de pedidos
+    response.setPedidosAsociados(pedidos);  
 
     return response;
 }

@@ -12,7 +12,7 @@ public interface ICentroDistribucionService {
 
     List<CentroDistribucionDTO> obtenerTodosLosCentros();
 
-    CentroDistribucionDTO obtenerCentroDistribucionPorId(int idCentro); // ← CAMBIADO
+    CentroDistribucionDTO obtenerCentroDistribucionPorId(int idCentro); 
 
     Optional<CentroDistribucionEntity> findByComunaCubierta(int idComuna);
 

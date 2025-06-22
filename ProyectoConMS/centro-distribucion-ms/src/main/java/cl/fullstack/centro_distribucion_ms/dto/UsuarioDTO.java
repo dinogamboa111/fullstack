@@ -6,5 +6,5 @@ import lombok.Data;
 public class UsuarioDTO {
     private int id;
     private String nombre;
-    // otros campos que necesites
+   
 }
