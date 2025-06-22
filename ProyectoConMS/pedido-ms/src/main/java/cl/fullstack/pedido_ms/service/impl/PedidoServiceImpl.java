@@ -310,5 +310,10 @@ public class PedidoServiceImpl implements IPedidoService {
         pedidoRepository.delete(pedido);
         return "Pedido eliminado con éxito";
     }
+
+    //v2
+     public List<PedidoEntity> obtenerPedidosPorDespachador(Integer idDespachador) {
+        return pedidoRepository.findByIdDespachador(idDespachador);
+    }
 }
 

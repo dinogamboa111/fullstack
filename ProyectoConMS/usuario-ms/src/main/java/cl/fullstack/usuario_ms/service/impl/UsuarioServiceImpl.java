@@ -2,10 +2,14 @@ package cl.fullstack.usuario_ms.service.impl;
 
 import cl.fullstack.usuario_ms.Client.CentroDistribucionClient;
 import cl.fullstack.usuario_ms.dto.UsuarioDTO;
+
 import cl.fullstack.usuario_ms.entity.UsuarioEntity;
 import cl.fullstack.usuario_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.usuario_ms.repository.UsuarioRepository;
 import cl.fullstack.usuario_ms.service.IUsuarioService;
+
+// import org.apache.el.stream.Optional;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,4 +121,22 @@ public class UsuarioServiceImpl implements IUsuarioService {
                 .orElseThrow(() -> new RecursoNoEncontradoException("Usuario no encontrado con ID: " + id));
         usuarioRepository.delete(usuario);
     }
+//probando
+ @Override
+public UsuarioDTO obtenerUsuarioPorId(int id) {
+    Optional<UsuarioEntity> usuarioEntityOpt = usuarioRepository.findById(id);  //
+    if (usuarioEntityOpt.isEmpty()) {
+        throw new RecursoNoEncontradoException("Usuario no encontrado con id: " + id);
+    }
+
+    UsuarioEntity usuarioEntity = usuarioEntityOpt.get();
+
+    
+    UsuarioDTO usuarioDTO = modelMapper.map(usuarioEntity, UsuarioDTO.class);
+
+    return usuarioDTO;
+}
+
+
+
 }

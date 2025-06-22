@@ -1,7 +1,7 @@
 package cl.fullstack.usuario_ms.controller;
 
 import cl.fullstack.usuario_ms.dto.UsuarioDTO;
-
+import cl.fullstack.usuario_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.usuario_ms.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,4 +58,19 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(despachadores);
     }
+    //metodo probando 
+     @GetMapping("/usuario-id/{id}")
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable Integer id) {
+        UsuarioDTO usuario = usuarioService.obtenerUsuarioPorId(id);
+        if (usuario == null) {
+            // Retornar 404 si no se encuentra el usuario
+            throw new RecursoNoEncontradoException("Usuario no encontrado con id: " + id);
+        }
+        return ResponseEntity.ok(usuario);
+    }
+
+
+
+
+
 }
