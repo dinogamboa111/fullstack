@@ -16,6 +16,7 @@ public interface IPedidoService {
     PedidoDTO updatePedido(int idPEdido, PedidoDTO pedidoDTO);
 
     String deletePedido(int idPedido);
+    
     List<PedidoEntity> obtenerPedidosPorDespachador(Integer idDespachador);
 
 }

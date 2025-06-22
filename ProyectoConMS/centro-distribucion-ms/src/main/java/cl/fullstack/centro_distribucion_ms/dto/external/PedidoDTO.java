@@ -1,4 +1,4 @@
-package cl.fullstack.centro_distribucion_ms.dto;
+package cl.fullstack.centro_distribucion_ms.dto.external;
 
 import java.util.List;
 

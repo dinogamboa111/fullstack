@@ -40,25 +40,18 @@ public class PedidoServiceImpl implements IPedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
-
     @Autowired
     private DetallePedidoRepository detallePedidoRepository;
-
     @Autowired
     private ModelMapper modelMapper;
-
     @Autowired
     private ProductoClient productoClient;
-
     @Autowired
     private ClienteClient clienteClient;
-
     @Autowired
     private UbicacionClient ubicacionClient;
-
     @Autowired
     private UsuarioClient usuarioClient;
-
     @Autowired
     private CentroDistribucionClient centroDistribucionClient;
 
@@ -189,7 +182,7 @@ public class PedidoServiceImpl implements IPedidoService {
     @Override
     public PedidoDTO getPedidoById(int id) {
         PedidoEntity entity = pedidoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pedido no encontrado con id: " + id));
+                .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
         return modelMapper.map(entity, PedidoDTO.class);
     }
 

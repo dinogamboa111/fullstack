@@ -58,7 +58,7 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(despachadores);
     }
-    //metodo probando 
+     //endpoint para conexion con centro-distribucion-ms
      @GetMapping("/usuario-id/{id}")
     public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable Integer id) {
         UsuarioDTO usuario = usuarioService.obtenerUsuarioPorId(id);
