@@ -2,6 +2,7 @@ package cl.fullstack.usuario_ms.service.impl;
 
 import cl.fullstack.usuario_ms.Client.CentroDistribucionClient;
 import cl.fullstack.usuario_ms.dto.UsuarioDTO;
+
 import cl.fullstack.usuario_ms.entity.UsuarioEntity;
 import cl.fullstack.usuario_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.usuario_ms.repository.UsuarioRepository;
@@ -117,4 +118,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
                 .orElseThrow(() -> new RecursoNoEncontradoException("Usuario no encontrado con ID: " + id));
         usuarioRepository.delete(usuario);
     }
+
+
+
 }

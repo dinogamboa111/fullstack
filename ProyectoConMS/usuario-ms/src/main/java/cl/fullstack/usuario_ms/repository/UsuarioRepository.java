@@ -20,4 +20,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer>
 
     List<UsuarioEntity> findByIdCentroAndRolId(Integer idCentro, Integer rolId);
 
+    
+
+
 }

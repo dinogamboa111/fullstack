@@ -2,6 +2,7 @@ package cl.fullstack.usuario_ms.service;
 
 import cl.fullstack.usuario_ms.dto.UsuarioDTO;
 
+
 import java.util.List;
 
 
@@ -19,5 +20,6 @@ public interface IUsuarioService {
     UsuarioDTO findPrimerUsuarioPorCentro(Integer idCentro);
 
     List<UsuarioDTO> buscarDespachadoresPorCentro(int idCentro);
+
 
 }
