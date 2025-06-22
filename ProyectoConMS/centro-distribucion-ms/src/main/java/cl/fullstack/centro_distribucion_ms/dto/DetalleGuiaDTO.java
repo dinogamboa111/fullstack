@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class DetalleGuiaDTO {
-    private Long idDetalle;     // opcional si lo necesitas en la respuesta
-    private Integer idPedido;   // ID del pedido asociado
+    private int idDetalle;     // opcional si lo necesitas en la respuesta
+    private int idPedido;   // ID del pedido asociado
 }

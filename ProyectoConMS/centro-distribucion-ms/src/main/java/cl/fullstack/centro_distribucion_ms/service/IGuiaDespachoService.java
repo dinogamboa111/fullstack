@@ -22,5 +22,5 @@ package cl.fullstack.centro_distribucion_ms.service;
 import cl.fullstack.centro_distribucion_ms.dto.GuiaDespachoResponseDTO;
 
 public interface IGuiaDespachoService {
-    GuiaDespachoResponseDTO crearGuiaDespacho(Long idDespachador);
+    GuiaDespachoResponseDTO crearGuiaDespacho(int idDespachador);
 }

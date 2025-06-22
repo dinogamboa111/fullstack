@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class GuiaDespachoCreateRequest {
-    private Long idDespachador;
+    private int idDespachador;
 }

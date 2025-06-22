@@ -5,8 +5,8 @@ import java.util.List;
 
 @Data
 public class GuiaDespachoResponseDTO {
-    private Long idGuia;
-    private Long idDespachador;
-    private List<PedidoAsociadoDTO> pedidosAsociados;
+    private int idGuia;
+    private int idDespachador;
+    private List<PedidoDTO> pedidosAsociados;
 }
 

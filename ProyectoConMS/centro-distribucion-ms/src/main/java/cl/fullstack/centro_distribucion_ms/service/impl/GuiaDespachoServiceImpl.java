@@ -84,7 +84,7 @@ import cl.fullstack.centro_distribucion_ms.exception.DatosInvalidosException;
 import cl.fullstack.centro_distribucion_ms.exception.RecursoNoEncontradoException;
 import cl.fullstack.centro_distribucion_ms.repository.GuiaDespachoRepository;
 import cl.fullstack.centro_distribucion_ms.service.IGuiaDespachoService;
-import cl.fullstack.centro_distribucion_ms.dto.PedidoAsociadoDTO;
+
 
 
 
@@ -100,9 +100,10 @@ public class GuiaDespachoServiceImpl implements IGuiaDespachoService {
     @Autowired
     private PedidoClient pedidoClient;
 
-    @Override
-public GuiaDespachoResponseDTO crearGuiaDespacho(Long idDespachador) {
-    if (idDespachador == null || idDespachador <= 0) {
+   
+@Override
+public GuiaDespachoResponseDTO crearGuiaDespacho(int idDespachador) {
+    if ( idDespachador <= 0) {
         throw new DatosInvalidosException("ID del despachador inválido");
     }
 
@@ -118,34 +119,16 @@ public GuiaDespachoResponseDTO crearGuiaDespacho(Long idDespachador) {
 
     GuiaDespachoEntity guia = new GuiaDespachoEntity();
     guia.setIdDespachador(idDespachador);
-
-    // Crear y asociar los detalles
-    List<DetalleGuiaEntity> detalles = pedidos.stream()
-        .map(p -> {
-            DetalleGuiaEntity detalle = new DetalleGuiaEntity();
-            detalle.setIdPedido(p.getIdPedido());
-            detalle.setGuiaDespacho(guia);
-            return detalle;
-        }).collect(Collectors.toList());
-
-    guia.setDetalles(detalles);
-
     GuiaDespachoEntity guiaGuardada = guiaDespachoRepository.save(guia);
-
-    // Preparar el DTO de respuesta
-    List<PedidoAsociadoDTO> pedidosAsociados = pedidos.stream()
-        .map(p -> {
-            PedidoAsociadoDTO dto = new PedidoAsociadoDTO();
-            dto.setIdPedido(p.getIdPedido());
-            return dto;
-        }).collect(Collectors.toList());
 
     GuiaDespachoResponseDTO response = new GuiaDespachoResponseDTO();
     response.setIdGuia(guiaGuardada.getIdGuia());
     response.setIdDespachador(idDespachador);
-    response.setPedidosAsociados(pedidosAsociados);
+    response.setPedidosAsociados(pedidos);  // <-- aquí pasas toda la lista completa de pedidos
 
     return response;
 }
+
+
 
 }

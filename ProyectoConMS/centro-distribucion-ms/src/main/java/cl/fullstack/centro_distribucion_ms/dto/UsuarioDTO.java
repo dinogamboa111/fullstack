@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UsuarioDTO {
-    private Long id;
+    private int id;
     private String nombre;
     // otros campos que necesites
 }

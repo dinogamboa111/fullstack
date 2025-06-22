@@ -22,7 +22,7 @@ public interface IUsuarioService {
     List<UsuarioDTO> buscarDespachadoresPorCentro(int idCentro);
 
     //metodo probando
-    UsuarioDTO obtenerUsuarioPorId(Integer id);
+    UsuarioDTO obtenerUsuarioPorId(int id);
 
 
 }

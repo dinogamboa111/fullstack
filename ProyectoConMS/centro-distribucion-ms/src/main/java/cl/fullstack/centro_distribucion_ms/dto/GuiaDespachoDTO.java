@@ -5,7 +5,7 @@ import java.util.List;
 
 @Data
 public class GuiaDespachoDTO {
-    private Long idGuia;                     // ID de la guía (opcional en creación, útil en respuesta)
-    private Integer idDespachador;          // ID del despachador
+    private int idGuia;                     // ID de la guía (opcional en creación, útil en respuesta)
+    private int idDespachador;          // ID del despachador
     private List<DetalleGuiaDTO> pedidosAsociados;  // Lista de pedidos relacionados
 }

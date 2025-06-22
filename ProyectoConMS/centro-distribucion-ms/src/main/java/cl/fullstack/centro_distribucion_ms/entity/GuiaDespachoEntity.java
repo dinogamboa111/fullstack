@@ -52,10 +52,10 @@ public class GuiaDespachoEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "guia_seq")
     @SequenceGenerator(name = "guia_seq", sequenceName = "GUIA_DESPACHO_SEQ", allocationSize = 1)
     @Column(name = "id_guia")
-    private Long idGuia;
+    private int idGuia;
 
     @Column(name = "id_despachador")
-    private Long idDespachador;
+    private int idDespachador;
 
     @OneToMany(mappedBy = "guiaDespacho", cascade = CascadeType.ALL, orphanRemoval = true)
 private List<DetalleGuiaEntity> detalles = new ArrayList<>();

@@ -60,7 +60,7 @@ public class UsuarioController {
     }
     //metodo probando 
      @GetMapping("/usuario-id/{id}")
-    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable int id) {
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable Integer id) {
         UsuarioDTO usuario = usuarioService.obtenerUsuarioPorId(id);
         if (usuario == null) {
             // Retornar 404 si no se encuentra el usuario

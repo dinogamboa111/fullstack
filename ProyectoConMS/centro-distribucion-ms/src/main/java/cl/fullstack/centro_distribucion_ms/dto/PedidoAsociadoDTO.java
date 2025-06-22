@@ -5,7 +5,7 @@ import lombok.Data;
 
     @Data
 public class PedidoAsociadoDTO {
-    private Integer idPedido;
+    private int idPedido;
 }
 
 

@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PedidoClient {
 
     @Autowired
-    private RestTemplate restTemplate;  // ✅ Inyecta el bean con @LoadBalanced
-public List<PedidoDTO> obtenerPedidosPorDespachador(Long idDespachador) {
+    private RestTemplate restTemplate;  // 
+public List<PedidoDTO> obtenerPedidosPorDespachador(int idDespachador) {
     try {
         ResponseEntity<List<PedidoDTO>> response = restTemplate.exchange(
             "http://pedido-ms/api/pedidos/despachador/" + idDespachador,
@@ -27,7 +27,7 @@ public List<PedidoDTO> obtenerPedidosPorDespachador(Long idDespachador) {
         );
         return response.getBody();
     } catch (Exception e) {
-        e.printStackTrace();  // <--- agrega para ver qué error ocurre si falla
+        e.printStackTrace(); 
         return Collections.emptyList();
     }
 }

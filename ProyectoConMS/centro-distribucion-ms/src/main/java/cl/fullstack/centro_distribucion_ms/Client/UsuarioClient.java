@@ -10,9 +10,9 @@ import cl.fullstack.centro_distribucion_ms.dto.UsuarioDTO;
 public class UsuarioClient {
 
     @Autowired
-    private RestTemplate restTemplate;  // ✅ usa el bean @LoadBalanced
+    private RestTemplate restTemplate;  // 
 
-    public UsuarioDTO obtenerUsuarioPorId(Long id) {
+    public UsuarioDTO obtenerUsuarioPorId(int id) {
         try {
             return restTemplate.getForObject(
                 "http://usuario-service/api/usuarios/usuario-id/" + id,

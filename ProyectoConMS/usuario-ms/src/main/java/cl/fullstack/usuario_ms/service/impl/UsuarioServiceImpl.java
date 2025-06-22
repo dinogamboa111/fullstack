@@ -123,20 +123,20 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 //probando
  @Override
-    public UsuarioDTO obtenerUsuarioPorId(Integer id) {
-        Optional<UsuarioEntity> usuarioEntityOpt = usuarioRepository.findById(id.intValue());  // id es int en entidad
-        
-        if (usuarioEntityOpt.isEmpty()) {
-            throw new RecursoNoEncontradoException("Usuario no encontrado con id: " + id);
-        }
-
-        UsuarioEntity usuarioEntity = usuarioEntityOpt.get();
-
-        // Mapear entidad a DTO usando ModelMapper
-        UsuarioDTO usuarioDTO = modelMapper.map(usuarioEntity, UsuarioDTO.class);
-
-        return usuarioDTO;
+public UsuarioDTO obtenerUsuarioPorId(int id) {
+    Optional<UsuarioEntity> usuarioEntityOpt = usuarioRepository.findById(id);  //
+    if (usuarioEntityOpt.isEmpty()) {
+        throw new RecursoNoEncontradoException("Usuario no encontrado con id: " + id);
     }
+
+    UsuarioEntity usuarioEntity = usuarioEntityOpt.get();
+
+    // Mapear entidad a DTO usando ModelMapper
+    UsuarioDTO usuarioDTO = modelMapper.map(usuarioEntity, UsuarioDTO.class);
+
+    return usuarioDTO;
+}
+
 
 
 }
