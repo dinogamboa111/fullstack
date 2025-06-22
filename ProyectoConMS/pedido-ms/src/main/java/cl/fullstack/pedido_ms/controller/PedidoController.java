@@ -21,6 +21,7 @@ public class PedidoController {
 
     @Autowired
     private IPedidoService pedidoService;
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping
