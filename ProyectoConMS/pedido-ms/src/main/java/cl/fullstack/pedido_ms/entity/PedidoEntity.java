@@ -57,9 +57,13 @@ public class PedidoEntity {
     // lista, tb se debe eliminar de la bbdd
     // * con esto, tal vez no es necesario un crud independiente para detallepedido,
     // porque todo lo que contemple detallepedido se puede manejar desde pedido
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "pedido_id_pedido") // debe coincidir EXACTAMENTE con la FK en detalle_pedido
-    private List<DetallePedidoEntity> detallePedido;
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JoinColumn(name = "pedido_id_pedido") // debe coincidir EXACTAMENTE con la FK en detalle_pedido
+    // private List<DetallePedidoEntity> detallePedido;
+
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+private List<DetallePedidoEntity> detallePedido;
+
 
     @Column(name = "id_despachador", nullable = true)
     private Integer idDespachador;
