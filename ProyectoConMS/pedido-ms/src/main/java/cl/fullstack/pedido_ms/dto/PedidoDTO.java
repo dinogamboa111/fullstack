@@ -17,7 +17,7 @@ public class PedidoDTO {
     private boolean estadoPedido;
     private List<DetallePedidoDTO> detallePedido;
     private Integer idDespachador;
-    
+    private Integer idCentro;
    
     
 }
