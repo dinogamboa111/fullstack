@@ -63,7 +63,7 @@ public ResponseEntity<String> deletePedido(@PathVariable int idPedido) {
     }
 
 
-    //v2
+    //endpoint para conexion con centro-distribucion-ms
     @GetMapping("/despachador/{idDespachador}")
 public ResponseEntity<List<PedidoDTO>> obtenerPedidosPorDespachador(@PathVariable Integer idDespachador) {
     List<PedidoEntity> pedidos = pedidoService.obtenerPedidosPorDespachador(idDespachador);

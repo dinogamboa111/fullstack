@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import cl.fullstack.centro_distribucion_ms.dto.UsuarioDTO;
+import cl.fullstack.centro_distribucion_ms.dto.external.UsuarioDTO;
 
 @Service
 public class UsuarioClient {
