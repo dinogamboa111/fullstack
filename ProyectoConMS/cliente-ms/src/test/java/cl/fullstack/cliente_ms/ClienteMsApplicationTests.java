@@ -33,7 +33,7 @@ public class ClienteMsApplicationTests {
     // Cliente HTTP que permite hacer peticiones REST al servidor arrancado en el
     // test.
 
-    private static final int TEST_RUT = 11222333;
+    private static final int TEST_RUT = 12345678;
     // Constante con un valor fijo para el RUT del cliente de prueba.
 
     private String getUrl(String path) {
