@@ -9,18 +9,69 @@ import cl.fullstack.pruducto_ms.service.ICategoriaService;
 import jakarta.validation.Valid;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/api/categorias")
+@Tag(name = "Categorías", description = "Operaciones relacionadas con las categorías de productos")
 public class CategoriaController {
 
     @Autowired
     private ICategoriaService categoriaService;
 
-    // crear categoria
+    @Operation(summary = "Crear una nueva categoría")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Categoría creada exitosamente"),
+        @ApiResponse(responseCode = "400", description = "Solicitud inválida")
+    })
     @PostMapping
-    public ResponseEntity<CategoriaDTO> crearCategoria(@RequestBody CategoriaDTO categoriaDTO) {
+    public ResponseEntity<CategoriaDTO> crearCategoria(
+            @RequestBody CategoriaDTO categoriaDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.crearCategoria(categoriaDTO));
     }
+
+    @Operation(summary = "Actualizar una categoría existente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categoría actualizada correctamente"),
+        @ApiResponse(responseCode = "404", description = "Categoría no encontrada"),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+    })
+    @PutMapping("/{idCategoria}")
+    public ResponseEntity<CategoriaDTO> actualizarCategoria(
+            @Parameter(description = "ID de la categoría a actualizar", example = "1")
+            @Valid @PathVariable int idCategoria,
+            @RequestBody CategoriaDTO categoriaDTO) {
+        return ResponseEntity.ok(categoriaService.actualizarCategoria(idCategoria, categoriaDTO));
+    }
+
+    @Operation(summary = "Obtener una categoría por su ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categoría encontrada"),
+        @ApiResponse(responseCode = "404", description = "Categoría no encontrada")
+    })
+    @GetMapping("/{idCategoria}")
+    public ResponseEntity<CategoriaDTO> obtenerCategoria(
+            @Parameter(description = "ID de la categoría a consultar", example = "1")
+            @PathVariable int idCategoria) {
+        return ResponseEntity.ok(categoriaService.obtenerCategoria(idCategoria));
+    }
+
+    @Operation(summary = "Listar todas las categorías")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Listado obtenido correctamente")
+    })
+    @GetMapping
+    public ResponseEntity<List<CategoriaDTO>> listarCategorias() {
+        return ResponseEntity.ok(categoriaService.listarCategorias());
+    }
+
+}
+
+
 
     // eliminar catgoria-- se comenta ya que al eliminar este dato afectariamos la integridad de datos de la tabla producto
     // @DeleteMapping("/{idCategoria}")
@@ -28,24 +79,3 @@ public class CategoriaController {
     //     String mensaje = categoriaService.eliminarCategoria(idCategoria);
     //     return ResponseEntity.ok(mensaje);
     // }
-
-    // modificar categoria
-    @PutMapping("/{idCategoria}")
-    public ResponseEntity<CategoriaDTO> actualizarCategoria(@Valid @PathVariable int idCategoria,
-            @RequestBody CategoriaDTO categoriaDTO) {
-        return ResponseEntity.ok(categoriaService.actualizarCategoria(idCategoria, categoriaDTO));
-    }
-
-    // obtener categoria
-    @GetMapping("/{idCategoria}")
-    public ResponseEntity<CategoriaDTO> obtenerCategoria(@PathVariable int idCategoria) {
-        return ResponseEntity.ok(categoriaService.obtenerCategoria(idCategoria));
-    }
-
-    // listar categorias
-    @GetMapping
-    public ResponseEntity<List<CategoriaDTO>> listarCategorias() {
-        return ResponseEntity.ok(categoriaService.listarCategorias());
-    }
-
-}
