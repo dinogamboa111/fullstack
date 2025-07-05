@@ -8,8 +8,6 @@ import cl.fullstack.pruducto_ms.entity.CategoriaEntity;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<CategoriaEntity, Integer> {
-
-    // Optional<CategoriaEntity> findByIdCategoria(int idCategoria);
-    Optional<CategoriaEntity> findByNombreCategoria(String nombreCategoria);
-    // boolean findByNombreCategoria(String nombreCategoria);
+    
+    Optional<CategoriaEntity> findByNombreCategoria(String nombreCategoria);  
 }
