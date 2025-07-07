@@ -20,9 +20,9 @@ public class CentroDistribucionClient {
     public Optional<CentroDistribucionDTO> obtenerCentroPorComuna(int idComuna) {
         try {
             String url = CENTRO_SERVICE + "/api/centros-distribucion/comuna/" + idComuna;
-            CentroDistribucionDTO centro = restTemplate.getForObject(url, CentroDistribucionDTO.class);
-            return Optional.ofNullable(centro);
-        } catch (Exception e) {
+            CentroDistribucionDTO centro = restTemplate.getForObject(url, CentroDistribucionDTO.class); 
+            return Optional.ofNullable(centro); 
+        } catch (Exception e) { 
             // Mejor loguear el error para debug
             System.err.println("Error al obtener centro: " + e.getMessage());
             return Optional.empty();
